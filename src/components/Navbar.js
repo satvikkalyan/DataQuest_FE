@@ -19,13 +19,13 @@ function Navbar() {
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
           <div>
-          <Link to="/about-us" className="menu-bar-link">
+          <Link to="/about-us" className="menu-bar-link company-title">
               Data Quest
             </Link>
           </div>
           <div className="menu-bar-right">
 
-            <Link to="/about-us" className="menu-bar-link">
+            <Link to="/" className="menu-bar-link">
               Home
             </Link>
             <Link to="/about-us" className="menu-bar-link">

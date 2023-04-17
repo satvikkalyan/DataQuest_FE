@@ -8,8 +8,8 @@ import {
   Outlet,
   createRoutesFromElements,
 } from "react-router-dom";
-import Products from "./routes/Products";
-import Home from "./routes/Home";
+import About from "./routes/about/About";
+import Home from "./routes/home/Home";
 import Reports from "./routes/Reports";
 import Navbar from "./components/Navbar";
 import "./App.css";
@@ -21,15 +21,7 @@ const AppLayout = () => (
   </>
 );
 
-// const router = createBrowserRouter(
-//   createRoutesFromElements(
-//     <Route element={<AppLayout />}>
-//       <Route path="/" element={<Home />} />
-//       <Route path="/products" element={<Products />} />
-//       <Route path="/reports" element={<Reports />} />
-//     </Route>
-//   )
-// );
+
 
 const router = createBrowserRouter([
   {
@@ -40,8 +32,8 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "products",
-        element: <Products />,
+        path: "about-us",
+        element: <About />,
       },
       {
         path: "reports",
