@@ -34,8 +34,8 @@ function Navbar() {
             <Link to="/contact-us" className="menu-bar-link">
               Contact Us
             </Link>
-            <Link to="/logout" className="menu-bar-link">
-              Logout
+            <Link to="/login" className="menu-bar-link">
+              Login
             </Link>
           </div>
         </div>

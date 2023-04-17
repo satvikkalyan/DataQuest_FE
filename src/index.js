@@ -10,7 +10,9 @@ import Home from "./routes/home/Home";
 import Navbar from "./components/Navbar";
 import "./App.css";
 import Contact from "./routes/contact/Contact";
-import { ThemeProvider, createTheme } from "@mui/material/styles"; // Import ThemeProvider and createTheme from Material-UI
+import { ThemeProvider, createTheme } from "@mui/material/styles"; 
+import LoginScreen from "./routes/login/LoginScreen";
+import Register from "./routes/register/Register";
 const AppLayout = () => (
   <>
     <Navbar />
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
       {
         path: "contact-us",
         element: <Contact />,
+      },
+      {
+        path: "login",
+        element: <LoginScreen />,
+      },
+      {
+        path: "register",
+        element: <Register />,
       },
     ],
   },
