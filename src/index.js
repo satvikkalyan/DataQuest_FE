@@ -14,6 +14,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import LoginScreen from "./routes/login/LoginScreen";
 import Register from "./routes/register/Register";
 import Profile from "./routes/profile/Profile";
+import Search from "./routes/search/Search";
 const AppLayout = () => (
   <>
     <Navbar />
@@ -57,6 +58,9 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
+      },      {
+        path: "search",
+        element: <Search />,
       },
     ],
   },

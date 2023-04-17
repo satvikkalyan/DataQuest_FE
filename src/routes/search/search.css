@@ -1,0 +1,31 @@
+.search-container {
+    height: 100vh;
+    padding-left: 50px;
+    border-style: solid;
+    border-color: red;
+}
+.search-title{
+    width: 393px;
+    height: 156px;
+    font-family: 'Inter';
+    font-weight: 800;
+    font-size: 50px;
+    line-height: 61px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.14em;
+    color: #0F6392;
+}
+.search-container-top {
+    height: 50%;
+    border-style: solid;
+    border-color: blue;
+}
+
+.search-container-bottom {
+    border-style: solid;
+    height: 50%;
+    border-color: chartreuse;
+}
+

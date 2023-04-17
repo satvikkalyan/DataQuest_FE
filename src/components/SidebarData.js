@@ -4,7 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import WorkIcon from "@mui/icons-material/Work";
-
+import ControlPointIcon from '@mui/icons-material/ControlPoint';
 export const SidebarData = [
   {
     title: "Profile",
@@ -14,8 +14,14 @@ export const SidebarData = [
   },
   {
     title: "Search",
-    path: "/reports",
+    path: "/search",
     icon: <SearchIcon />,
+    cName: "nav-text",
+  },
+  {
+    title: "Add Jobs",
+    path: "/products",
+    icon: <ControlPointIcon />,
     cName: "nav-text",
   },
   {

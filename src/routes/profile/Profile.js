@@ -4,7 +4,6 @@ import { Button } from "@mui/material";
 import "./profile.css";
 import { TextField } from "@mui/material";
 import Rating from "@mui/material/Rating";
-import Typography from "@mui/material/Typography";
 
 function Profile() {
   const [value, setValue] = useState(3.5);
@@ -81,6 +80,17 @@ function Profile() {
                 variant="outlined"
               />
             </div>
+
+            <div className="bi-element">
+            <TextField
+                id="outlined-multiline-static"
+                label="Skills"
+                multiline
+                rows={4}
+                defaultValue=""
+              />
+            </div>
+
           </div>
           <div className="professional-details-title">
             <p>Job Rating</p>
