@@ -1,6 +1,4 @@
 import React from "react";
-import * as FaIcons from "react-icons/fa";
-
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from "@mui/icons-material/Settings";
