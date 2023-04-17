@@ -18,7 +18,7 @@ function Contact() {
                 label="Name"
                 variant="outlined"
               />
-            </div>{" "}
+            </div>
             <div className="Boxer">
               <TextField
                 id="outlined-basic-1"

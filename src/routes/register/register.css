@@ -1,0 +1,35 @@
+.login-container{
+    display: flex; 
+    flex-direction: column;
+    justify-content: flex-start; /* Center horizontally */
+    height: 100vh; /* Set height to 100% of viewport height */
+    border-style: solid;
+    border-color: aqua;
+}
+.login-content{
+    width: 30%;
+    height: 30%;
+}
+
+.login-container{
+    padding-top: 100px;
+}
+.login-title{
+    font-size: xx-large;
+    color: #0F6392;
+}
+
+
+.login-picture{
+    padding-top: 30px;
+}
+
+.span-warning{
+    color: red;
+    font-size: small;
+}
+
+.span-green{
+    color: black;
+    font-size: small;
+}
