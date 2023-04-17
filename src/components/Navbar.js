@@ -31,7 +31,7 @@ function Navbar() {
             <Link to="/about-us" className="menu-bar-link">
               About Us
             </Link>
-            <Link to="/logout" className="menu-bar-link">
+            <Link to="/contact-us" className="menu-bar-link">
               Contact Us
             </Link>
             <Link to="/logout" className="menu-bar-link">

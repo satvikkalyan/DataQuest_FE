@@ -1,0 +1,93 @@
+.contact-title {
+    width: 393px;
+    height: 156px;
+    font-family: 'Inter';
+    font-weight: 800;
+    font-size: 50px;
+    line-height: 61px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.14em;
+    color: #0F6392;
+}
+
+
+.under-line {
+    box-sizing: border-box;
+    margin-top: 100px;
+    position: absolute;
+    width: 90%;
+    height: 0px;
+    border-radius: 25%;
+    background: #0F6392;
+    border: 5px solid rgba(15, 99, 146, 0.5);
+    transform: rotate(-0.16deg);
+}
+.content-sepatator {
+    padding-bottom: 50px;
+}
+
+
+.contact-container {
+    padding-left: 50px;
+    height: calc(100vh - 80px);
+}
+
+.contact-content {
+    display: flex;
+    height: calc(100vh - 240px);
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-container-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.contact-container-right {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    background: url("./../../resourses/contact-us.png");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.input-components{
+    margin-top: 20px;
+    width: 50%;
+}
+
+.Boxer{
+    display: flex;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.Boxer .MuiTextField-root {
+    width: 100%; /* Set width to 100% to span the full width of the parent container */
+  }
+
+
+.Boxer-button{
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; 
+}
+
+.submit-button {
+    width: 100%;
+  }

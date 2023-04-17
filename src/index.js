@@ -7,19 +7,26 @@ import {
 } from "react-router-dom";
 import About from "./routes/about/About";
 import Home from "./routes/home/Home";
-import Reports from "./routes/Reports";
 import Navbar from "./components/Navbar";
 import "./App.css";
-
+import Contact from "./routes/contact/Contact";
+import { ThemeProvider, createTheme } from "@mui/material/styles"; // Import ThemeProvider and createTheme from Material-UI
 const AppLayout = () => (
   <>
     <Navbar />
     <Outlet />
   </>
 );
-
-
-
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#0F6392", // Replace with your desired primary color
+    },
+    secondary: {
+      main: "#008000", // Replace with your desired secondary color
+    },
+  },
+});
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
@@ -33,13 +40,16 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: "reports",
-        element: <Reports />,
+        path: "contact-us",
+        element: <Contact />,
       },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
+  <ThemeProvider theme={theme}>
   <RouterProvider router={router} />
+  </ThemeProvider>
+
 );
