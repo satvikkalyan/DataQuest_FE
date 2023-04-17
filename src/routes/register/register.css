@@ -3,8 +3,7 @@
     flex-direction: column;
     justify-content: flex-start; /* Center horizontally */
     height: 100vh; /* Set height to 100% of viewport height */
-    border-style: solid;
-    border-color: aqua;
+
 }
 .login-content{
     width: 30%;

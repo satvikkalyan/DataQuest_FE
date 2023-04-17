@@ -8,7 +8,7 @@ import WorkIcon from "@mui/icons-material/Work";
 export const SidebarData = [
   {
     title: "Profile",
-    path: "/",
+    path: "/profile",
     icon: <PermIdentityIcon />,
     cName: "nav-text",
   },

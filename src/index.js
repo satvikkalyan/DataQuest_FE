@@ -13,6 +13,7 @@ import Contact from "./routes/contact/Contact";
 import { ThemeProvider, createTheme } from "@mui/material/styles"; 
 import LoginScreen from "./routes/login/LoginScreen";
 import Register from "./routes/register/Register";
+import Profile from "./routes/profile/Profile";
 const AppLayout = () => (
   <>
     <Navbar />
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },
