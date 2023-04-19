@@ -20,7 +20,7 @@ export const SidebarData = [
   },
   {
     title: "Add Jobs",
-    path: "/products",
+    path: "/mod-jobs",
     icon: <ControlPointIcon />,
     cName: "nav-text",
   },

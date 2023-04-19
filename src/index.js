@@ -15,6 +15,7 @@ import LoginScreen from "./routes/login/LoginScreen";
 import Register from "./routes/register/Register";
 import Profile from "./routes/profile/Profile";
 import Search from "./routes/search/Search";
+import ModifyJobs from "./routes/admin/ModifyJobs";
 const AppLayout = () => (
   <>
     <Navbar />
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       },      {
         path: "search",
         element: <Search />,
+      },
+      {
+        path: "mod-jobs",
+        element: <ModifyJobs/>,
       },
     ],
   },
