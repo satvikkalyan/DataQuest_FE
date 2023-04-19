@@ -2,7 +2,7 @@ import React from "react";
 import "./modifyJobs.css";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
-import BasicTable from "../../components/TableComponent";
+import AdminTable from "../../components/tables/AdminTable";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
@@ -75,7 +75,7 @@ function ModifyJobs() {
         </div>
         <div className="search-container-bottom">
           <div className="table-container">
-            <BasicTable />
+            <AdminTable />
           </div>
         </div>
       </div>

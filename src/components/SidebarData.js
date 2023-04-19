@@ -26,7 +26,7 @@ export const SidebarData = [
   },
   {
     title: "Jobs",
-    path: "/products",
+    path: "/jobs",
     icon: <WorkIcon />,
     cName: "nav-text",
   },

@@ -3,7 +3,7 @@ import "./search.css";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
-import BasicTable from "../../components/TableComponent";
+import BasicTable from "../../components/tables/TableComponent"
 function Search() {
   return (
     <>

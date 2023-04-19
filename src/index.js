@@ -16,6 +16,8 @@ import Register from "./routes/register/Register";
 import Profile from "./routes/profile/Profile";
 import Search from "./routes/search/Search";
 import ModifyJobs from "./routes/admin/ModifyJobs";
+import JobList from "./routes/jobs/JobList";
+import JobDetail from "./routes/jobDetail/JobDetail";
 const AppLayout = () => (
   <>
     <Navbar />
@@ -67,6 +69,14 @@ const router = createBrowserRouter([
         path: "mod-jobs",
         element: <ModifyJobs/>,
       },
+      {
+        path: "jobs",
+        element: <JobList/>,
+      },
+      {
+        path: "jobs/:id",
+        element: <JobDetail />,
+      }
     ],
   },
 ]);
