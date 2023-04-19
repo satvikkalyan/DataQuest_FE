@@ -1,9 +1,11 @@
 .search-container {
     height: fit-content;
     padding-left: 50px;
+    padding-right: 150px;
 }
-.search-title{
-    width: 393px;
+
+.search-title {
+    width: 800px;
     height: 156px;
     font-family: 'Inter';
     font-weight: 800;
@@ -15,19 +17,23 @@
     letter-spacing: 0.14em;
     color: #0F6392;
 }
+
 .search-container-top {
     height: fit-content;
-    display: flex;
-    justify-content: center;
 }
 
-/* .search-container-top-left {
-
+.search-container-top-left {
+    border-style: solid;
+    border-color: blue;
+    width: 50%;
 }
 
 .search-container-top-right {
+    border-style: solid;
+    border-color: green;
+    width: 50%;
+}
 
-} */
 .search-container-bottom {
     height: fit-content;
     display: flex;
@@ -36,26 +42,35 @@
 }
 
 
-.Boxer{
+.Boxer {
     display: flex;
     margin-top: 20px;
     width: 100%;
 }
 
 
-.skills-title{
-font-weight: bolder;
-font-size: large;
-padding-top: 20px;
-padding-right: 20px;
+.skills-title {
+    font-weight: bolder;
+    font-size: large;
+    padding-top: 20px;
+    padding-right: 20px;
 }
 
-.plus-icon{
+.plus-icon {
     align-items: center;
     justify-content: center;
 }
 
-.table-container{
+.table-container {
     padding-top: 30px;
-    width: 80%;
+    width: 100%;
+}
+
+.buttons-container{
+    padding-left: 100px;
+    width: 50%;
+}
+
+.add-button{
+    width: 60%;
 }
