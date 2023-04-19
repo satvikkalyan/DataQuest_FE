@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useNavigate } from "react-router-dom";
+
 function createData(id, name, calories, fat, carbs, protein) {
   return { id, name, calories, fat, carbs, protein };
 }
@@ -31,8 +32,14 @@ const rows = [
     createData(15,"Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-function UserViewTable() {  
-    const navigate = useNavigate();
+function UserViewTable() {
+  const navigate = useNavigate();
+
+  const handleRowClick = (row) => {
+    // navigate to the job detail page and pass the row data as state
+    navigate(`/jobs/${row.id}`, { state: row });
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -60,7 +67,10 @@ function UserViewTable() {
               <TableCell align="right">{row.fat}</TableCell>
               <TableCell align="right">{row.carbs}</TableCell>
               <TableCell align="right">
-                <IconButton color="primary" onClick={()=>navigate(`${row.id}`)}>
+                <IconButton
+                  color="primary"
+                  onClick={() => handleRowClick(row)} // pass entire row data as state
+                >
                   <NavigateNextIcon />
                 </IconButton>
               </TableCell>
