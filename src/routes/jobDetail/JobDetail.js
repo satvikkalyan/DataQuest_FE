@@ -1,15 +1,13 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-
+import "./jobDetail.css"
 function JobDetail() {
     const location = useLocation();
-    const { id, name, calories, fat, carbs, protein } = location.state; // get the job data from the state
-
-  // fetch the job details using the ID and display them
+    const { id, name, calories, fat, carbs, protein } = location.state; 
   return (
-    <div>
-      <h1>Job Details for ID: {id}</h1>
+    <div className='job-details-container'>
+      <p>Job Details for ID: {id}</p>
       <p>Name: {name}</p>
       <p>Calories: {calories}</p>
       <p>Fat: {fat}</p>
