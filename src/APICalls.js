@@ -13,4 +13,13 @@ export const getDataFromAPI = (URL) => {
       });
   };
 
-  
+  export const postDataToAPI = (URL, jsonData) => {
+    return fetch(URL, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(jsonData),
+    }).then(res => res.json());
+  };

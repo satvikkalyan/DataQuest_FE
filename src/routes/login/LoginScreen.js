@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import {  useUpdateLoginDet } from "../../UserContext";
 import { APIURL, userObjTemplate } from "../../constants";
-import { getDataFromAPI } from "../../fetchCalls";
+import { getDataFromAPI } from "../../APICalls";
 import { useNavigate } from "react-router-dom";
 function LoginScreen() {
   const [email, setEmail] = useState("");
