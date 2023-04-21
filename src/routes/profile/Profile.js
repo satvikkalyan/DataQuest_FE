@@ -28,16 +28,38 @@ function Profile() {
       salary: formValues.salary,
       salary_type: formValues.salary_type,
     };
-    putDataToAPI(`${APIURL}/users/${userDetails.user_id}`, updatedUserData)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.error(err));
-    putDataToAPI(`${APIURL}/users-job/${userDetails.user_id}`, jobData)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.error(err));
+    if (
+      formValues.firstName !== userDetails.firstName ||
+      formValues.lastName !== userDetails.lastName
+    ) {
+      putDataToAPI(`${APIURL}/users/${userDetails.user_id}`, updatedUserData)
+        .then((res) => {
+          console.log(res);
+          userDetails.firstName = formValues.firstName;
+          userDetails.lastName = formValues.lastName;
+          updateUserDetails(userDetails);
+          setDisabled(true)
+        })
+        .catch((err) => console.error(err));
+    }
+    if (
+      userDetails.company !== formValues.company ||
+      userDetails.title !== formValues.title ||
+      userDetails.job_rating !== formValues.job_rating ||
+      userDetails.salary !== formValues.salary
+    ) {
+      putDataToAPI(`${APIURL}/users-job/${userDetails.user_id}`, jobData)
+        .then((res) => {
+          console.log(res);
+          userDetails.company = formValues.company;
+          userDetails.title = formValues.title;
+          userDetails.job_rating = formValues.job_rating;
+          userDetails.salary = formValues.salary;
+          updateUserDetails(userDetails);
+          setDisabled(true)
+        })
+        .catch((err) => console.error(err));
+    }
   };
   const checkIfSame = (object, formValues) => {
     return (
@@ -45,7 +67,8 @@ function Profile() {
       object.lastName === formValues.lastName &&
       object.company === formValues.company &&
       object.title === formValues.title &&
-      object.job_rating === formValues.job_rating
+      object.job_rating === formValues.job_rating &&
+      object.salary === formValues.salary
     );
   };
   const [formValues, setFormValues] = useState({
