@@ -72,7 +72,7 @@ function Navbar() {
                 ):
                   if (item.title === "Add jobs" && !userDetails.isAdmin) {
                     // If user is not an admin and item is "Add jobs", skip rendering this item
-                    return null;
+                    return <></>;
                   }
                   // For all other items or if user is an admin, display as usual
                   return (
@@ -84,7 +84,7 @@ function Navbar() {
                     </li>
                   );
                 default:
-                  break;
+                  return <></>;
               }
             })}
           </ul>
