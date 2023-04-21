@@ -143,9 +143,9 @@ const rows = [
   ),
 ];
 
-export default function BasicTable() {
+export default function BasicTable({length}) {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(length?length:5);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

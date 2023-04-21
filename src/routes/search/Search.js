@@ -68,7 +68,7 @@ function Search() {
         </div>
         <div className="search-container-bottom">
           <div className="table-container">
-            <BasicTable />
+            <BasicTable length={5}/>
           </div>
         </div>
       </div>

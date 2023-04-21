@@ -1,6 +1,7 @@
 import React from "react";
 import "./jobList.css";
-import UserViewTable from "../../components/tables/UserViewTable";
+import BasicTable from "../../components/tables/TableComponent";
+// import UserViewTable from "../../components/tables/UserViewTable";
 
 function JobList() {
   return (
@@ -12,7 +13,8 @@ function JobList() {
         </div>
         <div className="search-container-top">
           <div className="table-container">
-            <UserViewTable />
+            {/* <UserViewTable /> */}
+            <BasicTable length={20}/>
           </div>
         </div>
       </div>
