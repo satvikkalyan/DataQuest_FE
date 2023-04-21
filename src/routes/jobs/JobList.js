@@ -5,6 +5,7 @@ import { mockData } from "../../utils/mockData";
 // import UserViewTable from "../../components/tables/UserViewTable";
 
 function JobList() {
+  console.log(mockData)
   return (
     <>
       <div className="search-container">
@@ -15,7 +16,7 @@ function JobList() {
         <div className="search-container-top">
           <div className="table-container">
             {/* <UserViewTable /> */}
-            <BasicTable row={mockData} length={20}/>
+            <BasicTable rows={mockData} length={20}/>
           </div>
         </div>
       </div>

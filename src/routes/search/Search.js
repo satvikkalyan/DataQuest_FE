@@ -69,7 +69,7 @@ function Search() {
         </div>
         <div className="search-container-bottom">
           <div className="table-container">
-            <BasicTable row={mockData} length={5}/>
+            <BasicTable rows={mockData} length={5}/>
           </div>
         </div>
       </div>
