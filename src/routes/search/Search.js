@@ -3,27 +3,34 @@ import "./search.css";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
-import BasicTable from "../../components/tables/TableComponent"
+import CancelIcon from "@mui/icons-material/Cancel";
+import BasicTable from "../../components/tables/TableComponent";
 
 function Search() {
-  const [numSkills, setNumSkills] = useState(2); // initial number of text fields
+  const [skills, setSkills] = useState([{ value: "" }]);
 
-  const addSkill = () => {
-    setNumSkills(numSkills + 1); // add one to the number of text fields
+  const handleChange = (index, event) => {
+    const values = [...skills];
+    values[index].value = event.target.value;
+    setSkills(values);
   };
 
-  const skills = [];
-  for (let i = 1; i <= numSkills; i++) {
-    skills.push(
-      <div className="Boxer" key={i}>
-        <TextField
-          id={`outlined-basic-${i}`}
-          label="Enter your Skill Here"
-          variant="outlined"
-        />
-      </div>
-    );
-  }
+  const handleAddFields = () => {
+    const values = [...skills];
+    values.push({ value: "" });
+    setSkills(values);
+  };
+
+  const handleRemoveFields = (index) => {
+    const values = [...skills];
+    values.splice(index, 1);
+    setSkills(values);
+  };
+
+  const handleSearch = () => {
+    // logic for searching using the values in the `skills` state array
+    console.log(skills);
+  };
 
   return (
     <>
@@ -37,12 +44,23 @@ function Search() {
             <p className="skills-title">Skills:</p>
           </div>
           <div className="search-container-top-right">
-            {skills}
-            <div className="Boxer plus-icon" onClick={addSkill}>
-              <ControlPointIcon />
+            {skills.map((skill, index) => (
+              <div key={index} className="Boxer">
+                <TextField
+                  id={`skill-${index}`}
+                  label="Enter your Skill Here"
+                  variant="outlined"
+                  value={skill.value}
+                  onChange={(event) => handleChange(index, event)}
+                />
+                <CancelIcon onClick={() => handleRemoveFields(index)} />
+              </div>
+            ))}
+            <div className="Boxer plus-icon">
+              <ControlPointIcon onClick={handleAddFields} />
             </div>
             <div className="Boxer plus-icon">
-              <Button variant="contained" className="Search-button">
+              <Button variant="contained" className="Search-button" onClick={handleSearch} disabled={skills.length===0}>
                 Search
               </Button>
             </div>

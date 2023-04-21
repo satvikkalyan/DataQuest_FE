@@ -19,14 +19,17 @@
     height: fit-content;
     display: flex;
     justify-content: center;
+    width: 70%;
 }
 
 /* .search-container-top-left {
-
+border-style: solid;
+border-color: red;
 }
 
 .search-container-top-right {
-
+    border-style: solid;
+    border-color: gray;
 } */
 .search-container-bottom {
     height: fit-content;
@@ -39,12 +42,15 @@
 .Boxer{
     display: flex;
     margin-top: 20px;
-    width: 100%;
+    padding-left: 30px;
+    align-items: center;
+    width: 50% !important;
 }
 
 
 .skills-title{
 font-weight: bolder;
+text-align: right;
 font-size: large;
 padding-top: 20px;
 padding-right: 20px;
