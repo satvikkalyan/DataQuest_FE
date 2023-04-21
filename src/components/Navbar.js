@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { SidebarData } from "./SidebarData"
+import { SidebarData } from "./SidebarData";
 import "../App.css";
 import { IconContext } from "react-icons";
 import { useLoginDet, useUpdateLoginDet } from "../UserContext";
@@ -61,21 +61,31 @@ function Navbar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
+
             {SidebarData.map((item, index) => {
-              if (
-                !(
+              switch (true) {
+                case !(
                   userDetails.user_id === "" &&
-                  (item.title === "Profile" || item.title === "Logout"|| item.title === "Settings")
-                )
-              )
-                return (
-                  <li key={index} className={item.cName}>
-                    <Link to={item.path}>
-                      {item.icon}
-                      <span>{item.title}</span>
-                    </Link>
-                  </li>
-                );
+                  (item.title === "Profile" ||
+                    item.title === "Logout" ||
+                    item.title === "Settings")
+                ):
+                  if (item.title === "Add jobs" && !userDetails.isAdmin) {
+                    // If user is not an admin and item is "Add jobs", skip rendering this item
+                    return null;
+                  }
+                  // For all other items or if user is an admin, display as usual
+                  return (
+                    <li key={index} className={item.cName}>
+                      <Link to={item.path}>
+                        {item.icon}
+                        <span>{item.title}</span>
+                      </Link>
+                    </li>
+                  );
+                default:
+                  break;
+              }
             })}
           </ul>
         </nav>

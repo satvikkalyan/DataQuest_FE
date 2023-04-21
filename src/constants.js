@@ -11,6 +11,7 @@ export const userObjTemplate = {
   salary: null,
   salary_type: null,
   user_id: '',
+  isAdmin: false
 };
 
 export const APIURL = "http://localhost:3001";

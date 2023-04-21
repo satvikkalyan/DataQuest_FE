@@ -4,18 +4,25 @@ import "./login.css";
 import profileImg from "./../../resourses/profile-img.png";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import {  useUpdateLoginDet } from "../../UserContext";
+import { useUpdateLoginDet } from "../../UserContext";
 import { APIURL, userObjTemplate } from "../../constants";
 import { getDataFromAPI } from "../../APICalls";
 import { useNavigate } from "react-router-dom";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+
 function LoginScreen() {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
-  const [userObj, setUserObj] = useState();
+  const [admin, setAdmin] = useState("");
+  const [, setUserObj] = useState();
   const updateUserDetails = useUpdateLoginDet();
-  const checkIfCorrectCred = () => {
-    return userObj.passphrase === password;
+  const checkIfCorrectCred = (userDataObject) => {
+    return (
+      userDataObject?.passphrase === password &&
+      (userDataObject?.isAdmin === 1 ? true : false) ===
+        (admin === "True" ? true : false)
+    );
   };
 
   const onLoginClicked = () => {
@@ -33,12 +40,12 @@ function LoginScreen() {
         salary: userData.salary,
         salary_type: userData.salary_type,
         user_id: userData.user_id,
+        isAdmin: userData.isAdmin,
       };
 
-      if (checkIfCorrectCred) {
-        setUserObj(userDataObject);
+      if (checkIfCorrectCred(userDataObject)) {
         updateUserDetails(userDataObject);
-        navigate("/home")
+        navigate("/home");
       } else {
         setUserObj(userObjTemplate);
       }
@@ -48,7 +55,9 @@ function LoginScreen() {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-
+  const handleAdminChange = (e) => {
+    setAdmin(e.target.value);
+  };
   const handlePasswordChage = (e) => {
     setPassword(e.target.value);
   };
@@ -82,6 +91,22 @@ function LoginScreen() {
             autoComplete="current-password"
             onChange={handlePasswordChage}
           />
+        </div>
+        <div className="Boxed pd-t-30">
+          <FormControl variant="outlined" className="Boxer">
+            <InputLabel id="gender-label">Admin</InputLabel>
+            <Select
+              labelId="gender-label"
+              id="gender-select"
+              label="Admin"
+              name="admin"
+              value={admin}
+              onChange={handleAdminChange}
+            >
+              <MenuItem value="True">Yes</MenuItem>
+              <MenuItem value="False">No</MenuItem>
+            </Select>
+          </FormControl>
         </div>
         <div className="Boxer">
           <span className="span-warning">Forgot Password?</span>
