@@ -5,12 +5,14 @@ import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import "../App.css";
 import { IconContext } from "react-icons";
-import "./navbar.css"
+import { useLoginDet, useUpdateLoginDet } from "../UserContext";
+import { userObjTemplate } from "./../constants.js";
+import "./navbar.css";
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
-
+  const userDetails = useLoginDet();
+  const updateUserDetails = useUpdateLoginDet();
   const showSidebar = () => setSidebar(!sidebar);
-
   return (
     <>
       <IconContext.Provider value={{ color: "undefined" }}>
@@ -19,13 +21,12 @@ function Navbar() {
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
           <div>
-          <Link to="/about-us" className="menu-bar-link company-title">
+            <Link to="/about-us" className="menu-bar-link company-title">
               Data Quest
             </Link>
           </div>
           <div className="menu-bar-right">
-
-            <Link to="/" className="menu-bar-link">
+            <Link to="/home" className="menu-bar-link">
               Home
             </Link>
             <Link to="/about-us" className="menu-bar-link">
@@ -34,9 +35,22 @@ function Navbar() {
             <Link to="/contact-us" className="menu-bar-link">
               Contact Us
             </Link>
-            <Link to="/login" className="menu-bar-link">
-              Login
-            </Link>
+
+            {userDetails.user_id !== "" ? (
+              <Link
+                to="/home"
+                className="menu-bar-link"
+                onClick={() => {
+                  updateUserDetails(userObjTemplate);
+                }}
+              >
+                Log Out
+              </Link>
+            ) : (
+              <Link to="/login" className="menu-bar-link">
+                Login
+              </Link>
+            )}
           </div>
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>

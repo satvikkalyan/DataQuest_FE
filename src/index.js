@@ -18,6 +18,7 @@ import Search from "./routes/search/Search";
 import ModifyJobs from "./routes/admin/ModifyJobs";
 import JobList from "./routes/jobs/JobList";
 import JobDetail from "./routes/jobDetail/JobDetail";
+import { UserDetailsProvider } from "./UserContext";
 const AppLayout = () => (
   <>
     <Navbar />
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       {
-        path: "/",
+        path: "/home",
         element: <Home />,
       },
       {
@@ -83,7 +84,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <ThemeProvider theme={theme}>
+    <UserDetailsProvider>
+
   <RouterProvider router={router} />
+  </UserDetailsProvider>
   </ThemeProvider>
 
 );
