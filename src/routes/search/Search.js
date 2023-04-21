@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import "./search.css";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import BasicTable from "../../components/tables/TableComponent"
+
 function Search() {
+  const [numSkills, setNumSkills] = useState(2); // initial number of text fields
+
+  const addSkill = () => {
+    setNumSkills(numSkills + 1); // add one to the number of text fields
+  };
+
+  const skills = [];
+  for (let i = 1; i <= numSkills; i++) {
+    skills.push(
+      <div className="Boxer" key={i}>
+        <TextField
+          id={`outlined-basic-${i}`}
+          label="Enter your Skill Here"
+          variant="outlined"
+        />
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="search-container">
@@ -17,21 +37,8 @@ function Search() {
             <p className="skills-title">Skills:</p>
           </div>
           <div className="search-container-top-right">
-            <div className="Boxer">
-              <TextField
-                id="outlined-basic-1"
-                label="Enter your Skill Here"
-                variant="outlined"
-              />
-            </div>
-            <div className="Boxer">
-              <TextField
-                id="outlined-basic-1"
-                label="Enter your Skill Here"
-                variant="outlined"
-              />
-            </div>
-            <div className="Boxer plus-icon">
+            {skills}
+            <div className="Boxer plus-icon" onClick={addSkill}>
               <ControlPointIcon />
             </div>
             <div className="Boxer plus-icon">
