@@ -2,7 +2,6 @@ export const userObjTemplate = {
   firstName: "",
   lastName: "",
   email: "",
-  password: "",
   gender: "",
   title: "",
   company: null,

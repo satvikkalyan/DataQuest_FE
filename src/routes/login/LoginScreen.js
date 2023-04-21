@@ -15,7 +15,6 @@ function LoginScreen() {
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [admin, setAdmin] = useState("");
-  const [, setUserObj] = useState();
   const updateUserDetails = useUpdateLoginDet();
   const checkIfCorrectCred = (userDataObject) => {
     return (
@@ -47,7 +46,7 @@ function LoginScreen() {
         updateUserDetails(userDataObject);
         navigate("/home");
       } else {
-        setUserObj(userObjTemplate);
+        updateUserDetails(userObjTemplate);
       }
     });
   };
