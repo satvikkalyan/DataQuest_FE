@@ -3,8 +3,7 @@ import "./modifyJobs.css";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import AdminTable from "../../components/tables/AdminTable";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 function ModifyJobs() {
   const [payType, setPayType] = React.useState("Pay Type");
@@ -15,15 +14,17 @@ function ModifyJobs() {
 
   return (
     <>
-      <div className="search-container">
-        <div className="search-title">
+      <div className="modify-container">
+        <div className="modify-title">
           <h4>Modify/Add Jobs</h4>
           <p className="under-line"></p>
         </div>
-        <div className="search-container-top">
-          <div className="search-container-top-left">
-            <p className="skills-title">Job Details:</p>
-            <div className="buttons-container">
+        <div className="modify-container-top">
+          <div className="modify-container-top-left">
+            <div className="modify-container-top-left-0">
+              <p className="skills-title">Job Details:</p>
+            </div>
+            <div className="modify-container-top-left-1">
               <div className="Boxer">
                 <TextField
                   id="outlined-basic-1"
@@ -36,6 +37,8 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Job Description"
                   variant="outlined"
+                  multiline
+                  rows={4}
                 />
               </div>
               <div className="Boxer">
@@ -46,21 +49,38 @@ function ModifyJobs() {
                 />
               </div>
               <div className="Boxer">
-                <Select
-                  id="demo-simple-select"
-                  value={payType}
-                  label="Sassd"
-                  onChange={handleChange}
-                  sx={{ minWidth: "100%" }}
-                >
-                  <MenuItem value={1}>Per Hour</MenuItem>
-                  <MenuItem value={0}>Year</MenuItem>
-                </Select>
+                <FormControl variant="outlined" className="inputform">
+                  <InputLabel id="pay-type">Pay Type</InputLabel>
+                  <Select
+                    id="demo-simple-select"
+                    labelId="pay-type"
+                    label="Pay Type"
+                    value={payType}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={1}>Per Hour</MenuItem>
+                    <MenuItem value={0}>Year</MenuItem>
+                  </Select>
+                </FormControl>
               </div>
               <div className="Boxer">
                 <TextField
                   id="outlined-basic-1"
                   label="Company"
+                  variant="outlined"
+                />
+              </div>
+              <div className="Boxer">
+                <TextField
+                  id="outlined-basic-1"
+                  label="Job Title"
+                  variant="outlined"
+                />
+              </div>
+              <div className="Boxer">
+                <TextField
+                  id="outlined-basic-1"
+                  label="Rating"
                   variant="outlined"
                 />
               </div>
@@ -70,13 +90,127 @@ function ModifyJobs() {
                 </Button>
               </div>
             </div>
+            <div className="modify-container-top-left-1">
+              <div className="Boxer">
+                <FormControl variant="outlined" className="inputform">
+                  <InputLabel id="e-p-d">Employee Provided Data</InputLabel>
+                  <Select
+                    id="demo-simple-select-2"
+                    labelId="e-p-d"
+                    label="Employee Provided Data"
+                    value={payType}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={1}>True</MenuItem>
+                    <MenuItem value={0}>False</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+              <div className="Boxer">
+                <TextField
+                  id="outlined-basic-1"
+                  label="Lower Salary"
+                  variant="outlined"
+                />
+              </div>
+              <div className="Boxer">
+                <TextField
+                  id="outlined-basic-1"
+                  label="Upper Salary"
+                  variant="outlined"
+                />
+              </div>
+              <div className="Boxer">
+                <TextField
+                  id="outlined-basic-1"
+                  label="Average Salary"
+                  variant="outlined"
+                />
+              </div>
+              <div className="Boxer">
+                <TextField
+                  id="outlined-basic-1"
+                  label="Location"
+                  variant="outlined"
+                />
+              </div>
+              <div className="Boxer">
+                <TextField
+                  id="outlined-basic-1"
+                  label="Headquarters"
+                  variant="outlined"
+                />
+              </div>
+              <div className="Boxer">
+                <TextField
+                  id="outlined-basic-1"
+                  label="Size"
+                  variant="outlined"
+                />
+              </div>
+              <div className="Boxer">
+                <TextField
+                  id="outlined-basic-1"
+                  label="founded in"
+                  variant="outlined"
+                />
+              </div>
+            </div>
+
+            <div className="modify-container-top-left-1">
+              <div className="Boxer">
+                <TextField
+                  id="outlined-basic-1"
+                  label="Ownership"
+                  variant="outlined"
+                />
+              </div>
+              <div className="Boxer">
+                <TextField
+                  id="outlined-basic-1"
+                  label="Industry"
+                  variant="outlined"
+                />
+              </div>
+              <div className="Boxer">
+                <TextField
+                  id="outlined-basic-1"
+                  label="Sector"
+                  variant="outlined"
+                />
+              </div>
+              <div className="Boxer">
+                <TextField
+                  id="outlined-basic-1"
+                  label="Revenue"
+                  variant="outlined"
+                />
+              </div>
+              <div className="Boxer">
+                <TextField
+                  id="outlined-basic-1"
+                  label="Competitors"
+                  variant="outlined"
+                  multiline
+                  rows={4}
+                />
+              </div>
+              <div className="Boxer">
+                <TextField
+                  id="outlined-basic-1"
+                  label="Skills"
+                  variant="outlined"
+                  multiline
+                  rows={4}
+                />
+              </div>
+            </div>
           </div>
-          <div className="search-container-top-right"></div>
         </div>
-        <div className="search-container-bottom">
-          <div className="table-container">
-            <AdminTable />
-          </div>
+      </div>
+      <div className="modify-container-bottom">
+        <div className="table-container">
+          <AdminTable />
         </div>
       </div>
     </>
