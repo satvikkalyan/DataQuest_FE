@@ -4,8 +4,8 @@ import { Button } from "@mui/material";
 import "./profile.css";
 import { TextField } from "@mui/material";
 import { useLoginDet, useUpdateLoginDet } from "../../UserContext";
-import { APIURL, userObjTemplate } from "../../constants";
-import { postDataToAPI, putDataToAPI } from "../../APICalls";
+import { APIURL } from "../../constants";
+import { putDataToAPI } from "../../APICalls";
 
 import Rating from "@mui/material/Rating";
 
@@ -38,7 +38,7 @@ function Profile() {
           userDetails.firstName = formValues.firstName;
           userDetails.lastName = formValues.lastName;
           updateUserDetails(userDetails);
-          setDisabled(true)
+          setDisabled(true);
         })
         .catch((err) => console.error(err));
     }
@@ -56,7 +56,7 @@ function Profile() {
           userDetails.job_rating = formValues.job_rating;
           userDetails.salary = formValues.salary;
           updateUserDetails(userDetails);
-          setDisabled(true)
+          setDisabled(true);
         })
         .catch((err) => console.error(err));
     }
