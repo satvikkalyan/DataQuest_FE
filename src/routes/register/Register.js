@@ -5,7 +5,7 @@ import profileImg from "./../../resourses/profile-img.png";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { useLoginDet, useUpdateLoginDet } from "./../../UserContext";
+import { useUpdateLoginDet } from "./../../UserContext";
 import { APIURL, userObjTemplate } from "../../constants";
 import { postDataToAPI } from "../../APICalls";
 function Register() {
