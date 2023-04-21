@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import profileImg from "./../../resourses/profile-img.png";
 import { Button } from "@mui/material";
 import "./profile.css";
 import { TextField } from "@mui/material";
 import { useLoginDet, useUpdateLoginDet } from "../../UserContext";
 import { APIURL, userObjTemplate } from "../../constants";
-import { postDataToAPI } from "../../APICalls";
+import { postDataToAPI, putDataToAPI } from "../../APICalls";
 
 import Rating from "@mui/material/Rating";
 
@@ -15,6 +15,38 @@ function Profile() {
   const [skills, setSkills] = useState([]);
   const handleChange = (event) => {
     setSkills(event.target.value);
+  };
+  const onSaveClicked = () => {
+    const updatedUserData = {
+      firstName: formValues.firstName,
+      lastName: formValues.lastName,
+    };
+    const jobData = {
+      title: formValues.title,
+      company: formValues.company,
+      job_rating: formValues.job_rating,
+      salary: formValues.salary,
+      salary_type: formValues.salary_type,
+    };
+    putDataToAPI(`${APIURL}/users/${userDetails.user_id}`, updatedUserData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.error(err));
+    putDataToAPI(`${APIURL}/users-job/${userDetails.user_id}`, jobData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.error(err));
+  };
+  const checkIfSame = (object, formValues) => {
+    return (
+      object.firstName === formValues.firstName &&
+      object.lastName === formValues.lastName &&
+      object.company === formValues.company &&
+      object.title === formValues.title &&
+      object.job_rating === formValues.job_rating
+    );
   };
   const [formValues, setFormValues] = useState({
     firstName: userDetails.firstName,
@@ -30,6 +62,15 @@ function Profile() {
     user_id: userDetails.user_id,
     isAdmin: userDetails.isAdmin,
   });
+
+  const [disabled, setDisabled] = useState(true);
+  useEffect(() => {
+    if (!checkIfSame(userDetails, formValues)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [userDetails, formValues]);
 
   const onFormValueChange = (event) => {
     const { name, value } = event.target;
@@ -163,7 +204,9 @@ function Profile() {
             <div className="bi-element-2">
               <Rating
                 name="job_rating"
-                value={formValues.job_rating ? formValues.job_rating : 0}
+                value={
+                  formValues.job_rating ? parseInt(formValues.job_rating) : 0
+                }
                 precision={0.5}
                 onChange={onFormValueChange}
               />
@@ -171,7 +214,12 @@ function Profile() {
           </div>
 
           <div className="save-button">
-            <Button variant="contained" className="upload-button">
+            <Button
+              variant="contained"
+              className="upload-button"
+              disabled={disabled}
+              onClick={onSaveClicked}
+            >
               Save
             </Button>
           </div>
