@@ -9,6 +9,8 @@
 .login-content{
     width: 30%;
     height: 30%;
+    border-style: solid;
+    border-color: red;
 }
 
 .login-title{
@@ -29,4 +31,10 @@
 .span-green{
     color: black;
     font-size: small;
+}
+
+.Boxer{
+    display: flex;
+    margin-top: 20px;
+    width: 100%;
 }

@@ -10,10 +10,8 @@ import TablePagination from "@mui/material/TablePagination";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
-import { mockData } from "../../utils/mockData";
 import { columns } from "../../constants";
-export default function AdminTable({ data,length }) {
-  const rows = mockData
+export default function AdminTable({ rows, length }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(length ? length : 5);
 

@@ -91,7 +91,7 @@ function LoginScreen() {
             onChange={handlePasswordChage}
           />
         </div>
-        <div className="Boxed pd-t-30">
+        <div className="Boxer">
           <FormControl variant="outlined" className="Boxer">
             <InputLabel id="gender-label">Admin</InputLabel>
             <Select
@@ -113,7 +113,7 @@ function LoginScreen() {
             <span className="span-green">New User?</span>
           </Link>
         </div>
-        <div className="Boxer-button">
+        <div className="Boxer">
           <Button
             variant="contained"
             className="submit-button"

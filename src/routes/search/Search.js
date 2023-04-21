@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import CancelIcon from "@mui/icons-material/Cancel";
 import BasicTable from "../../components/tables/TableComponent";
+import { mockData } from "../../utils/mockData";
 
 function Search() {
   const [skills, setSkills] = useState([{ value: "" }]);
@@ -68,7 +69,7 @@ function Search() {
         </div>
         <div className="search-container-bottom">
           <div className="table-container">
-            <BasicTable length={5}/>
+            <BasicTable row={mockData} length={5}/>
           </div>
         </div>
       </div>

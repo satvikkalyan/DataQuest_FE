@@ -4,7 +4,7 @@ import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import AdminTable from "../../components/tables/AdminTable";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-
+import { mockData } from "../../utils/mockData";
 function ModifyJobs() {
   const [payType, setPayType] = React.useState("Pay Type");
 
@@ -210,7 +210,7 @@ function ModifyJobs() {
       </div>
       <div className="modify-container-bottom">
         <div className="table-container">
-          <AdminTable />
+          <AdminTable rows={mockData}/>
         </div>
       </div>
     </>

@@ -10,10 +10,8 @@ import TablePagination from "@mui/material/TablePagination";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useNavigate } from "react-router-dom";
 import { columns } from "../../constants";
-import { mockData } from "../../utils/mockData";
 
-export default function BasicTable({ length }) {
-  const rows = mockData;
+export default function BasicTable({ rows,length }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(length ? length : 5);
 
