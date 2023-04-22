@@ -40,7 +40,7 @@ function Register() {
       postDataToAPI(`${APIURL}/users`, newUserDetails).then((res) => {
         if (res > 0) {
           const updatedUserDetails = { ...userObjTemplate, ...newUserDetails };
-          updatedUserDetails.user_id = res.insertId;
+          updatedUserDetails.user_id = res;
           updateUserDetails(updatedUserDetails);
           navigate("/home");
         } else {

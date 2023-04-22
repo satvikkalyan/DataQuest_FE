@@ -34,7 +34,6 @@ function Profile() {
     ) {
       putDataToAPI(`${APIURL}/users/${userDetails.user_id}`, updatedUserData)
         .then((res) => {
-          console.log(res);
           userDetails.firstName = formValues.firstName;
           userDetails.lastName = formValues.lastName;
           updateUserDetails(userDetails);
