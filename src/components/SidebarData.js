@@ -1,7 +1,6 @@
 import React from "react";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import SearchIcon from "@mui/icons-material/Search";
-import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import WorkIcon from "@mui/icons-material/Work";
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
@@ -28,12 +27,6 @@ export const SidebarData = [
     title: "Jobs",
     path: "/jobs",
     icon: <WorkIcon />,
-    cName: "nav-text",
-  },
-  {
-    title: "Settings",
-    path: "/team",
-    icon: <SettingsIcon />,
     cName: "nav-text",
   },
   {
