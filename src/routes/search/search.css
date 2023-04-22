@@ -25,12 +25,11 @@
 /* .search-container-top-left {
 border-style: solid;
 border-color: red;
-}
+}*/
 
 .search-container-top-right {
-    border-style: solid;
-    border-color: gray;
-} */
+    width: 20%;
+} 
 .search-container-bottom {
     height: fit-content;
     display: flex;
@@ -39,12 +38,12 @@ border-color: red;
 }
 
 
-.Boxer{
+.boxer{
     display: flex;
     margin-top: 20px;
     padding-left: 30px;
     align-items: center;
-    width: 50% !important;
+    width: 100% !important;
 }
 
 
@@ -64,4 +63,12 @@ padding-right: 20px;
 .table-container{
     padding-top: 30px;
     width: 80%;
+}
+
+.boxer .MuiTextField-root {
+    width: 80%; 
+  }
+
+.cancel-icon{
+    padding-left: 20px;
 }

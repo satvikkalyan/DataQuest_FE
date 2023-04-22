@@ -46,7 +46,7 @@ function Search() {
           </div>
           <div className="search-container-top-right">
             {skills.map((skill, index) => (
-              <div key={index} className="Boxer">
+              <div key={index} className="boxer">
                 <TextField
                   id={`skill-${index}`}
                   label="Enter your Skill Here"
@@ -54,14 +54,21 @@ function Search() {
                   value={skill.value}
                   onChange={(event) => handleChange(index, event)}
                 />
-                <CancelIcon onClick={() => handleRemoveFields(index)} />
+                <div className="cancel-icon">
+                  <CancelIcon onClick={() => handleRemoveFields(index)} />
+                </div>
               </div>
             ))}
-            <div className="Boxer plus-icon">
+            <div className="boxer plus-icon">
               <ControlPointIcon onClick={handleAddFields} />
             </div>
-            <div className="Boxer plus-icon">
-              <Button variant="contained" className="Search-button" onClick={handleSearch} disabled={skills.length===0}>
+            <div className="boxer plus-icon">
+              <Button
+                variant="contained"
+                className="Search-button"
+                onClick={handleSearch}
+                disabled={skills.length === 0}
+              >
                 Search
               </Button>
             </div>
@@ -69,7 +76,7 @@ function Search() {
         </div>
         <div className="search-container-bottom">
           <div className="table-container">
-            <BasicTable rows={mockData} length={5}/>
+            <BasicTable rows={mockData} length={5} />
           </div>
         </div>
       </div>

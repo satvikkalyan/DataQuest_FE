@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField } from "@mui/material";
 import "./contact.css";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 function Contact() {
   return (
     <div className="contact-container">
@@ -12,21 +12,21 @@ function Contact() {
       <div className="contact-content">
         <div className="contact-container-left">
           <div className="input-components">
-            <div className="Boxer">
+            <div className="boxer">
               <TextField
                 id="outlined-basic-1"
                 label="Name"
                 variant="outlined"
               />
             </div>
-            <div className="Boxer">
+            <div className="boxer">
               <TextField
                 id="outlined-basic-1"
                 label="Email"
                 variant="outlined"
               />
             </div>
-            <div className="Boxer">
+            <div className="boxer">
               <TextField
                 id="outlined-multiline-static"
                 label="Description"
@@ -35,8 +35,12 @@ function Contact() {
                 defaultValue=""
               />
             </div>
-            <div className="Boxer-button">
-              <Button variant="contained" className="submit-button">Submit</Button>
+            <div className="boxer">
+              <div className="boxer-button">
+                <Button variant="contained" className="submit-button">
+                  Submit
+                </Button>
+              </div>
             </div>
           </div>
         </div>
