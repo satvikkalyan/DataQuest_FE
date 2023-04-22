@@ -7,8 +7,6 @@ function Home() {
   const description_1_2 =
     "In addition to its advanced job matching capabilities, DataQuest also provides valuable insights into the job market through user-friendly charts and graphs. By presenting the most up-to-date job market data, job seekers can make informed decisions about their career path and identify potential growth areas. With its user-friendly interface and comprehensive data analysis, DataQuest is the ultimate job search tool for the modern job seeker.";
   const title_2 = "How to Use DataQuest:";
-  const description_2 =
-    "Id porta nibh venenatis cras. Orci porta non pulvinar neque laoreet. Congue quisque egestas diam in arcu cursus euismod quis. Volutpat ac tincidunt vitae semper. Euismod nisi porta lorem mollis. Pulvinar elementum integer enim neque. Venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. Enim lobortis scelerisque fermentum dui faucibus. Scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique.";
   return (
     <div className="home-container">
       <div className="home-title">
