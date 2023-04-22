@@ -1,16 +1,12 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Outlet,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "./routes/about/About";
 import Home from "./routes/home/Home";
 import Navbar from "./components/Navbar";
 import "./App.css";
 import Contact from "./routes/contact/Contact";
-import { ThemeProvider, createTheme } from "@mui/material/styles"; 
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import LoginScreen from "./routes/login/LoginScreen";
 import Register from "./routes/register/Register";
 import Profile from "./routes/profile/Profile";
@@ -66,22 +62,23 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
-      },      {
+      },
+      {
         path: "search",
         element: <Search />,
       },
       {
         path: "mod-jobs",
-        element: <ModifyJobs/>,
+        element: <ModifyJobs />,
       },
       {
         path: "jobs",
-        element: <JobList/>,
+        element: <JobList />,
       },
       {
         path: "jobs/:id",
         element: <JobDetail />,
-      }
+      },
     ],
   },
 ]);
@@ -89,9 +86,7 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <ThemeProvider theme={theme}>
     <UserDetailsProvider>
-
-  <RouterProvider router={router} />
-  </UserDetailsProvider>
+      <RouterProvider router={router} />
+    </UserDetailsProvider>
   </ThemeProvider>
-
 );

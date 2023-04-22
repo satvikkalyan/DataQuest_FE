@@ -70,6 +70,7 @@ function Navbar() {
               } else {
                 return item;
               }
+              return undefined
             }).map((item, index) => {
               switch (true) {
                 case !(
