@@ -2,7 +2,6 @@ import React from "react";
 import "./jobList.css";
 import BasicTable from "../../components/tables/TableComponent";
 import { mockData } from "../../utils/mockData";
-// import UserViewTable from "../../components/tables/UserViewTable";
 
 function JobList() {
   console.log(mockData)
@@ -15,7 +14,6 @@ function JobList() {
         </div>
         <div className="search-container-top">
           <div className="table-container">
-            {/* <UserViewTable /> */}
             <BasicTable rows={mockData} length={20}/>
           </div>
         </div>

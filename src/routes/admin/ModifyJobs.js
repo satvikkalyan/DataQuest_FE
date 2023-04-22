@@ -6,10 +6,36 @@ import AdminTable from "../../components/tables/AdminTable";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { mockData } from "../../utils/mockData";
 function ModifyJobs() {
-  const [payType, setPayType] = React.useState("Pay Type");
+  const [formValues, setFormValues] = React.useState({
+    jobName: "",
+    jobDescription: "",
+    salary: "",
+    payType: "",
+    company: "",
+    jobTitle: "",
+    rating: "",
+    employeeProvidedData: "",
+    lowerSalary: "",
+    upperSalary: "",
+    averageSalary: "",
+    location: "",
+    headquarters: "",
+    size: "",
+    foundedIn: "",
+    ownership: "",
+    industry: "",
+    sector: "",
+    revenue: "",
+    competitors: "",
+    skills: "",
+  });
 
   const handleChange = (event) => {
-    setPayType(event.target.value);
+    const { name, value } = event.target;
+    setFormValues((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   return (
@@ -30,6 +56,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Job Name"
                   variant="outlined"
+                  name="jobName"
+                  value={formValues.jobName}
+                  onChange={handleChange}
                 />
               </div>
               <div className="Boxer">
@@ -39,6 +68,9 @@ function ModifyJobs() {
                   variant="outlined"
                   multiline
                   rows={4}
+                  name="jobDescription"
+                  value={formValues.jobDescription}
+                  onChange={handleChange}
                 />
               </div>
               <div className="Boxer">
@@ -46,6 +78,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Salary"
                   variant="outlined"
+                  name="salary"
+                  value={formValues.salary}
+                  onChange={handleChange}
                 />
               </div>
               <div className="Boxer">
@@ -55,7 +90,8 @@ function ModifyJobs() {
                     id="demo-simple-select"
                     labelId="pay-type"
                     label="Pay Type"
-                    value={payType}
+                    name="payType"
+                    value={formValues.payType}
                     onChange={handleChange}
                   >
                     <MenuItem value={1}>Per Hour</MenuItem>
@@ -68,6 +104,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Company"
                   variant="outlined"
+                  name="company"
+                  value={formValues.company}
+                  onChange={handleChange}
                 />
               </div>
               <div className="Boxer">
@@ -75,6 +114,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Job Title"
                   variant="outlined"
+                  name="jobTitle"
+                  value={formValues.jobTitle}
+                  onChange={handleChange}
                 />
               </div>
               <div className="Boxer">
@@ -82,6 +124,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Rating"
                   variant="outlined"
+                  name="rating"
+                  value={formValues.rating}
+                  onChange={handleChange}
                 />
               </div>
               <div className="Boxer plus-icon">
@@ -98,7 +143,8 @@ function ModifyJobs() {
                     id="demo-simple-select-2"
                     labelId="e-p-d"
                     label="Employee Provided Data"
-                    value={payType}
+                    name="employeeProvidedData"
+                    value={formValues.employeeProvidedData}
                     onChange={handleChange}
                   >
                     <MenuItem value={1}>True</MenuItem>
@@ -111,6 +157,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Lower Salary"
                   variant="outlined"
+                  name="lowerSalary"
+                  value={formValues.lowerSalary}
+                  onChange={handleChange}
                 />
               </div>
               <div className="Boxer">
@@ -118,6 +167,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Upper Salary"
                   variant="outlined"
+                  name="upperSalary"
+                  value={formValues.upperSalary}
+                  onChange={handleChange}
                 />
               </div>
               <div className="Boxer">
@@ -125,6 +177,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Average Salary"
                   variant="outlined"
+                  name="averageSalary"
+                  value={formValues.averageSalary}
+                  onChange={handleChange}
                 />
               </div>
               <div className="Boxer">
@@ -132,6 +187,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Location"
                   variant="outlined"
+                  name="location"
+                  value={formValues.location}
+                  onChange={handleChange}
                 />
               </div>
               <div className="Boxer">
@@ -139,6 +197,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Headquarters"
                   variant="outlined"
+                  name="headquarters"
+                  value={formValues.headquarters}
+                  onChange={handleChange}
                 />
               </div>
               <div className="Boxer">
@@ -146,6 +207,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Size"
                   variant="outlined"
+                  name="size"
+                  value={formValues.size}
+                  onChange={handleChange}
                 />
               </div>
               <div className="Boxer">
@@ -153,6 +217,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="founded in"
                   variant="outlined"
+                  name="foundedIn"
+                  value={formValues.foundedIn}
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -163,6 +230,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Ownership"
                   variant="outlined"
+                  name="ownership"
+                  value={formValues.ownership}
+                  onChange={handleChange}
                 />
               </div>
               <div className="Boxer">
@@ -170,6 +240,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Industry"
                   variant="outlined"
+                  name="industry"
+                  value={formValues.industry}
+                  onChange={handleChange}
                 />
               </div>
               <div className="Boxer">
@@ -177,6 +250,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Sector"
                   variant="outlined"
+                  name="sector"
+                  value={formValues.sector}
+                  onChange={handleChange}
                 />
               </div>
               <div className="Boxer">
@@ -184,6 +260,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Revenue"
                   variant="outlined"
+                  name="revenue"
+                  value={formValues.revenue}
+                  onChange={handleChange}
                 />
               </div>
               <div className="Boxer">
@@ -191,6 +270,9 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Competitors"
                   variant="outlined"
+                  name="competitors"
+                  value={formValues.competitors}
+                  onChange={handleChange}
                   multiline
                   rows={4}
                 />
@@ -202,6 +284,9 @@ function ModifyJobs() {
                   variant="outlined"
                   multiline
                   rows={4}
+                  name="skills"
+                  value={formValues.skills}
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -210,7 +295,7 @@ function ModifyJobs() {
       </div>
       <div className="modify-container-bottom">
         <div className="table-container">
-          <AdminTable rows={mockData}/>
+          <AdminTable rows={mockData} />
         </div>
       </div>
     </>
