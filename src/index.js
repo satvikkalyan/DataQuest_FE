@@ -15,6 +15,7 @@ import ModifyJobs from "./routes/admin/ModifyJobs";
 import JobList from "./routes/jobs/JobList";
 import JobDetail from "./routes/jobDetail/JobDetail";
 import { UserDetailsProvider } from "./UserContext";
+import Charts from "./routes/charts/Charts";
 const AppLayout = () => (
   <>
     <Navbar />
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: "jobs/:id",
         element: <JobDetail />,
+      },
+      {
+        path: "charts",
+        element: <Charts />,
       },
     ],
   },

@@ -93,7 +93,7 @@ function Navbar() {
                     </li>
                   );
                 default:
-                  return <></>;
+                  return undefined;
               }
             })}
           </ul>
