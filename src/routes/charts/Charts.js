@@ -1,27 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./charts.css";
 import BarChartComponent from "./BarChart";
 import { Button } from "@mui/material";
+import { getDataFromAPI } from "../../APICalls";
+import { APIURL } from "../../constants";
 function Charts() {
-  const annualData = [
-    { name: "Information Technology", avg_sal: 80000 },
-    { name: "Healthcare", avg_sal: 60000 },
-    { name: "Finance", avg_sal: 70000 },
-    { name: "Marketing", avg_sal: 55000 },
-    { name: "Education", avg_sal: 50000 },
-    { name: "Manufacturing", avg_sal: 65000 },
-    { name: "Retail", avg_sal: 45000 },
-    { name: "Hospitality", avg_sal: 40000 },
-    { name: "Legal", avg_sal: 90000 },
-    { name: "Construction", avg_sal: 55000 },
-  ];
+  const [annualData,setAnnualData] = useState([])
+  const [hourlyData,setHourlyData] = useState([])
+  const [Openings,setOpenings] = useState([])
+
   const [chartType, setChartType] = useState("Annual");
-  const hourlyData = [
-    { job_title: "Software Engineer", hourly_pay: 50.0 },
-    { job_title: "Data Analyst", hourly_pay: 35.5 },
-    { job_title: "Customer Service Representative", hourly_pay: 15.0 },
-    { job_title: "Graphic Designer", hourly_pay: 25.0 },
-  ];
+  useEffect(()=>{
+    getDataFromAPI(`${APIURL}/charts`).then((data)=>{
+      setAnnualData(data?.avgAnnuallyPayByIndustry)
+      setHourlyData(data?.avgHourlyPayByIndustry)
+      setOpenings(data?.numOfJobOpeningsByIndustry)
+    })
+  },[])
+
+
+
   const handleChange = (event) => {
     if (event.target.innerText === "HOURLY") {
       setChartType("HOURLY");
@@ -43,14 +41,14 @@ function Charts() {
           {chartType === "ANNUAL" ? (
             <BarChartComponent
               data={annualData}
-              x_axis={"name"}
-              y_axis={"avg_sal"}
+              x_axis={"Industry"}
+              y_axis={"AvgAnnuallyPay"}
             />
           ) : (
             <BarChartComponent
               data={hourlyData}
-              x_axis={"job_title"}
-              y_axis={"hourly_pay"}
+              x_axis={"Industry"}
+              y_axis={"AvgHourlyPay"}
             />
           )}
         </div>
@@ -83,9 +81,9 @@ function Charts() {
       <div className="charts-content">
         <div className="chart-row">
           <BarChartComponent
-            data={annualData}
-            x_axis={"name"}
-            y_axis={"avg_sal"}
+            data={Openings}
+            x_axis={"Industry"}
+            y_axis={"NumOfJobOpenings"}
           />
         </div>
       </div>
