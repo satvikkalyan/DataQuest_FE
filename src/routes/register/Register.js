@@ -65,7 +65,7 @@ function Register() {
         />
       </div>
       <div className="login-content">
-        <div className="Boxer">
+        <div className="boxer">
           <TextField
             id="firstName-field"
             name="firstName"
@@ -75,7 +75,7 @@ function Register() {
             value={formValues.firstName}
           />
         </div>
-        <div className="Boxer">
+        <div className="boxer">
           <TextField
             id="lastName-field"
             label="Last Name"
@@ -85,7 +85,7 @@ function Register() {
             value={formValues.lastName}
           />
         </div>
-        <div className="Boxer">
+        <div className="boxer">
           <TextField
             id="email-field"
             label="Email"
@@ -95,8 +95,8 @@ function Register() {
             onChange={onFormValueChange}
           />
         </div>
-        <div className="Boxed pd-t-30">
-          <FormControl variant="outlined" className="Boxer">
+        <div className="boxer ">
+          <FormControl variant="outlined" className="input-form">
             <InputLabel id="gender-label">Gender</InputLabel>
             <Select
               labelId="gender-label"
@@ -112,7 +112,7 @@ function Register() {
             </Select>
           </FormControl>
         </div>
-        <div className="Boxer">
+        <div className="boxer">
           <TextField
             id="password-input"
             label="Password"
@@ -123,7 +123,7 @@ function Register() {
             onChange={onFormValueChange}
           />
         </div>
-        <div className="Boxer">
+        <div className="boxer">
           <TextField
             id="confirm-password-input"
             label="Comfirm Password"
@@ -134,19 +134,23 @@ function Register() {
             onChange={onFormValueChange}
           />
         </div>
-        <div className="Boxer">
-          <Link to={"/login"}>
-            <span className="span-green">Existing User?</span>
-          </Link>
+        <div className="boxer">
+          <div className="boxer-link">
+            <Link to={"/login"}>
+              <span className="span-green">Existing User?</span>
+            </Link>
+          </div>
         </div>
-        <div className="Boxer-button">
-          <Button
-            variant="contained"
-            className="submit-button"
-            onClick={onSubmitClicked}
-          >
-            Sign Up
-          </Button>
+        <div className="boxer">
+          <div className="boxer-button">
+            <Button
+              variant="contained"
+              className="submit-button"
+              onClick={onSubmitClicked}
+            >
+              Sign Up
+            </Button>
+          </div>
         </div>
       </div>
     </div>

@@ -36,3 +36,19 @@
 .pd-t-30{
     padding-top: 20px;
 }
+
+.boxer{
+    display: flex;
+    margin-top: 20px;
+    width: 100% ;
+    justify-content: center;
+}
+
+.input-form{
+    width: 60%;
+}
+.boxer-link{
+
+    width: 60%;
+    text-align: start;
+}
