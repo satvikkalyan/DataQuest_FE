@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { SidebarData } from "./SidebarData";
+// import { SidebarData } from "./SidebarData";
 import "../App.css";
 import { IconContext } from "react-icons";
 import { useLoginDet, useUpdateLoginDet } from "../UserContext";
@@ -62,7 +62,7 @@ function Navbar() {
               </Link>
             </li>
 
-            {SidebarData.map((item, index) => {
+            {/* {SidebarData.map((item, index) => {
               switch (true) {
                 case !(
                   userDetails.user_id === "" &&
@@ -86,7 +86,7 @@ function Navbar() {
                 default:
                   return <></>;
               }
-            })}
+            })} */}
           </ul>
         </nav>
       </IconContext.Provider>
