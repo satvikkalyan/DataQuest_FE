@@ -70,7 +70,7 @@ function ModifyJobs() {
     }
     if (selectedJob) {
       setFormValues(selectedJob);
-      setSelectedJob(selectedJob)
+      setSelectedJob(selectedJob);
     }
   }, [selectedJob, rows.length]);
 
@@ -84,6 +84,9 @@ function ModifyJobs() {
 
   const handleDeleteRow = (id) => {
     const updatedRows = rows.filter((row) => row.jobId !== id);
+    getDataFromAPI(`${APIURL}/deleteJob/${id}}`).then((res) => {
+      console.log(res);
+    });
     setRows(updatedRows);
   };
 
