@@ -13,8 +13,7 @@ export const userObjTemplate = {
   isAdmin: false
 };
 
-export const APIURL = "http://localhost:3001";
-
+export const APIURL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";
 
 export const columns = [
   { id: "jobId", label: "Job Id", minWidth: 100 },
