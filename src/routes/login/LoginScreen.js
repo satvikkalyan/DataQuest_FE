@@ -63,18 +63,18 @@ function LoginScreen() {
 
   return (
     <div className="login-container">
-      <div className="login-title">
-        <h4>Login</h4>
-      </div>
-      <div className="login-picture">
-        <img
-          src={profileImg}
-          alt="profile"
-          style={{ width: "190px", height: "100px" }}
-        />
-      </div>
       <div className="login-content">
-        <div className="Boxer">
+        <div className="login-title">
+          <h4>Login</h4>
+        </div>
+        <div className="login-picture">
+          <img
+            src={profileImg}
+            alt="profile"
+            style={{ width: "190px", height: "100px" }}
+          />
+        </div>
+        <div className="boxer">
           <TextField
             id="outlined-basic-1"
             label="Email"
@@ -82,7 +82,7 @@ function LoginScreen() {
             onChange={handleEmailChange}
           />
         </div>
-        <div className="Boxer">
+        <div className="boxer">
           <TextField
             id="outlined-password-input"
             label="Password"
@@ -91,8 +91,8 @@ function LoginScreen() {
             onChange={handlePasswordChage}
           />
         </div>
-        <div className="Boxer">
-          <FormControl variant="outlined" className="Boxer">
+        <div className="boxer">
+          <FormControl variant="outlined" className="input-form">
             <InputLabel id="gender-label">Admin</InputLabel>
             <Select
               labelId="gender-label"
@@ -107,13 +107,14 @@ function LoginScreen() {
             </Select>
           </FormControl>
         </div>
-        <div className="Boxer">
+        <div className="boxer-left-align">
           <span className="span-warning">Forgot Password?</span>
           <Link to={"/register"}>
             <span className="span-green">New User?</span>
           </Link>
         </div>
-        <div className="Boxer">
+        <div className="boxer">
+          <div className="boxer-button">
           <Button
             variant="contained"
             className="submit-button"
@@ -121,6 +122,8 @@ function LoginScreen() {
           >
             Login
           </Button>
+          </div>
+
         </div>
       </div>
     </div>
