@@ -4,31 +4,29 @@ import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import AdminTable from "../../components/tables/AdminTable";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { mockData } from "../../utils/mockData";
+import { getDataFromAPI } from "../../APICalls";
+import { APIURL } from "../../constants";
 function ModifyJobs() {
-  const [rows, setRows] = useState(mockData);
-  const [selectedJob, setSelectedJob] = useState(null);
+  const [rows, setRows] = useState([]);
+  const [selectedJob, setSelectedJob] = useState(undefined);
   const handleEdit = (job) => {
-    console.log(job);
-    setSelectedJob(job);
+    updateFormValues(job);
   };
 
   const [formValues, setFormValues] = React.useState({
-    jobName: "",
-    jobDescription: "",
-    salary: "",
-    payType: "",
-    company: "",
     jobTitle: "",
+    jobDescription: "",
+    payType: "",
+    companyName: "",
     rating: "",
     employeeProvidedData: "",
     lowerSalary: "",
     upperSalary: "",
-    averageSalary: "",
+    avgSalary: "",
     location: "",
     headquarters: "",
     size: "",
-    foundedIn: "",
+    founded: "",
     ownership: "",
     industry: "",
     sector: "",
@@ -37,11 +35,44 @@ function ModifyJobs() {
     skills: "",
   });
 
+  const updateFormValues = (data) => {
+    const formValues = {
+      jobTitle: data.jobTitle,
+      jobDescription: data.jobDescription,
+      payType: data.payType ? 1 : 0,
+      companyName: data?.company?.companyName,
+      rating: data?.company?.rating,
+      employeeProvidedData: data.employerProvided ? 1 : 0,
+      lowerSalary: data.lowerSalary,
+      upperSalary: data.upperSalary,
+      avgSalary: data.avgSalary,
+      location: data?.company?.location,
+      headquarters: data?.company?.headquarters,
+      size: data?.company?.size,
+      founded: data?.company?.founded,
+      ownership: data?.company?.typeOfOwnership,
+      industry: data?.company?.industry,
+      sector: data?.company?.sector,
+      revenue: data?.company?.revenue,
+      competitors: data?.company?.competitors
+        .map((item) => item.competitorName)
+        .join(", "),
+      skills: data.skills?.map((item) => item.skill).join(", "),
+    };
+    setFormValues(formValues);
+  };
+
   useEffect(() => {
+    if (rows.length === 0) {
+      getDataFromAPI(`${APIURL}/allJobs`).then((data) => {
+        setRows(data);
+      });
+    }
     if (selectedJob) {
       setFormValues(selectedJob);
+      setSelectedJob(selectedJob)
     }
-  }, [selectedJob]);
+  }, [selectedJob, rows.length]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -87,7 +118,7 @@ function ModifyJobs() {
                   label="Job Name"
                   variant="outlined"
                   name="jobName"
-                  value={formValues.jobName}
+                  value={formValues.jobTitle}
                   onChange={handleChange}
                 />
               </div>
@@ -100,16 +131,6 @@ function ModifyJobs() {
                   rows={4}
                   name="jobDescription"
                   value={formValues.jobDescription}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="Boxer">
-                <TextField
-                  id="outlined-basic-1"
-                  label="Salary"
-                  variant="outlined"
-                  name="salary"
-                  value={formValues.salary}
                   onChange={handleChange}
                 />
               </div>
@@ -134,18 +155,8 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Company"
                   variant="outlined"
-                  name="company"
-                  value={formValues.company}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="Boxer">
-                <TextField
-                  id="outlined-basic-1"
-                  label="Job Title"
-                  variant="outlined"
-                  name="jobTitle"
-                  value={formValues.jobTitle}
+                  name="companyName"
+                  value={formValues.companyName}
                   onChange={handleChange}
                 />
               </div>
@@ -156,6 +167,16 @@ function ModifyJobs() {
                   variant="outlined"
                   name="rating"
                   value={formValues.rating}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="Boxer">
+                <TextField
+                  id="outlined-basic-1"
+                  label="founded in"
+                  variant="outlined"
+                  name="founded"
+                  value={formValues.founded}
                   onChange={handleChange}
                 />
               </div>
@@ -211,8 +232,8 @@ function ModifyJobs() {
                   id="outlined-basic-1"
                   label="Average Salary"
                   variant="outlined"
-                  name="averageSalary"
-                  value={formValues.averageSalary}
+                  name="avgSalary"
+                  value={formValues.avgSalary}
                   onChange={handleChange}
                 />
               </div>
@@ -243,16 +264,6 @@ function ModifyJobs() {
                   variant="outlined"
                   name="size"
                   value={formValues.size}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="Boxer">
-                <TextField
-                  id="outlined-basic-1"
-                  label="founded in"
-                  variant="outlined"
-                  name="foundedIn"
-                  value={formValues.foundedIn}
                   onChange={handleChange}
                 />
               </div>
@@ -331,6 +342,7 @@ function ModifyJobs() {
         <div className="table-container">
           <AdminTable
             rows={rows}
+            length={10}
             onEdit={handleEdit}
             onRowDelete={handleDeleteRow}
           />
