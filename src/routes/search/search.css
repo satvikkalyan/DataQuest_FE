@@ -2,12 +2,13 @@
     height: fit-content;
     padding-left: 50px;
 }
-.search-title{
+
+.search-title {
     width: 393px;
     height: 156px;
     font-family: 'Inter';
     font-weight: 800;
-    font-size: 50px;
+    font-size: 40px;
     line-height: 61px;
     display: flex;
     align-items: center;
@@ -15,6 +16,7 @@
     letter-spacing: 0.14em;
     color: #0F6392;
 }
+
 .search-container-top {
     height: fit-content;
     display: flex;
@@ -29,7 +31,8 @@ border-color: red;
 
 .search-container-top-right {
     width: 20%;
-} 
+}
+
 .search-container-bottom {
     height: fit-content;
     display: flex;
@@ -38,7 +41,7 @@ border-color: red;
 }
 
 
-.boxer{
+.boxer {
     display: flex;
     margin-top: 20px;
     padding-left: 30px;
@@ -47,28 +50,28 @@ border-color: red;
 }
 
 
-.skills-title{
-font-weight: bolder;
-text-align: right;
-font-size: large;
-padding-top: 20px;
-padding-right: 20px;
+.skills-title {
+    font-weight: bolder;
+    text-align: right;
+    font-size: large;
+    padding-top: 20px;
+    padding-right: 20px;
 }
 
-.plus-icon{
+.plus-icon {
     align-items: center;
     justify-content: center;
 }
 
-.table-container{
+.table-container {
     padding-top: 30px;
     width: 80%;
 }
 
 .boxer .MuiTextField-root {
-    width: 80%; 
-  }
+    width: 80%;
+}
 
-.cancel-icon{
+.cancel-icon {
     padding-left: 20px;
 }

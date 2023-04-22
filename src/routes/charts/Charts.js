@@ -23,12 +23,9 @@ function Charts() {
     { job_title: "Graphic Designer", hourly_pay: 25.0 },
   ];
   const handleChange = (event) => {
-    console.log(event.target.innerText);
     if (event.target.innerText === "HOURLY") {
-      console.log("Entered here");
       setChartType("HOURLY");
     } else {
-      console.log("Entered here 2");
       setChartType("ANNUAL");
     }
   };

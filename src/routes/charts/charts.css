@@ -3,7 +3,7 @@
     height: 156px;
     font-family: 'Inter';
     font-weight: 800;
-    font-size: 50px;
+    font-size: 40px;
     line-height: 61px;
     display: flex;
     align-items: center;
@@ -30,8 +30,12 @@
 }
 
 .chart-row{
+    display: flex;
     padding-top: 50px;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 50px;
+
 }
 
 .buttons{
@@ -43,4 +47,9 @@
 
 .button-container{
     padding-left: 10px;
+}
+
+.charts-sub-title{
+    display: flex;
+    justify-content: center;
 }
