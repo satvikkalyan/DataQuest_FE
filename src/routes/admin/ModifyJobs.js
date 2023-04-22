@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./modifyJobs.css";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -6,6 +6,13 @@ import AdminTable from "../../components/tables/AdminTable";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { mockData } from "../../utils/mockData";
 function ModifyJobs() {
+  const [rows, setRows] = useState(mockData);
+  const [selectedJob, setSelectedJob] = useState(null);
+  const handleEdit = (job) => {
+    console.log(job);
+    setSelectedJob(job);
+  };
+
   const [formValues, setFormValues] = React.useState({
     jobName: "",
     jobDescription: "",
@@ -30,12 +37,35 @@ function ModifyJobs() {
     skills: "",
   });
 
+  useEffect(() => {
+    if (selectedJob) {
+      setFormValues(selectedJob);
+    }
+  }, [selectedJob]);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormValues((prevState) => ({
       ...prevState,
       [name]: value,
     }));
+  };
+
+  const handleDeleteRow = (id) => {
+    const updatedRows = rows.filter((row) => row.jobId !== id);
+    setRows(updatedRows);
+  };
+
+  const handleAddJob = () => {
+    if (selectedJob) {
+      const updatedJob = { ...selectedJob, ...formValues };
+      console.log(updatedJob);
+      // update the selected job in the mockData array
+    } else {
+      const newJob = { id: "23", ...formValues };
+      // add the new job to the mockData array
+      console.log(newJob);
+    }
   };
 
   return (
@@ -130,7 +160,11 @@ function ModifyJobs() {
                 />
               </div>
               <div className="Boxer plus-icon">
-                <Button variant="contained" className="add-button">
+                <Button
+                  variant="contained"
+                  className="add-button"
+                  onClick={handleAddJob}
+                >
                   Add Job
                 </Button>
               </div>
@@ -295,7 +329,11 @@ function ModifyJobs() {
       </div>
       <div className="modify-container-bottom">
         <div className="table-container">
-          <AdminTable rows={mockData} />
+          <AdminTable
+            rows={rows}
+            onEdit={handleEdit}
+            onRowDelete={handleDeleteRow}
+          />
         </div>
       </div>
     </>

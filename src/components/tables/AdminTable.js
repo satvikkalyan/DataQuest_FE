@@ -11,7 +11,17 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import { columns } from "../../constants";
-export default function AdminTable({ rows, length }) {
+import { useState } from "react";
+export default function AdminTable({ rows, length, onEdit, onRowDelete }) {
+  const [items, setItems] = useState(rows);
+
+  const handleDelete = (id) => {
+    const updatedItems = items.filter((item) => item.jobId !== id);
+    // Update the state to remove the deleted item
+    setItems(updatedItems);
+    onRowDelete(id);
+  };
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(length ? length : 5);
 
@@ -41,7 +51,7 @@ export default function AdminTable({ rows, length }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {items
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
@@ -52,10 +62,15 @@ export default function AdminTable({ rows, length }) {
                         <TableCell key={column.id} align={column.align}>
                           {column.id === "navigate" ? (
                             <>
-                              <IconButton color="primary">
+                              <IconButton
+                                color="primary"
+                                onClick={() => onEdit(row)}
+                              >
                                 <EditIcon />
                               </IconButton>
-                              <IconButton>
+                              <IconButton
+                                onClick={() => handleDelete(row.jobId)}
+                              >
                                 <DeleteIcon style={{ color: "red" }} />
                               </IconButton>
                             </>
