@@ -46,6 +46,7 @@ function LoginScreen() {
         updateUserDetails(userDataObject);
         navigate("/home");
       } else {
+        window.alert("Incorrect Credentials");
         updateUserDetails(userObjTemplate);
       }
     });
@@ -115,15 +116,14 @@ function LoginScreen() {
         </div>
         <div className="boxer">
           <div className="boxer-button">
-          <Button
-            variant="contained"
-            className="submit-button"
-            onClick={onLoginClicked}
-          >
-            Login
-          </Button>
+            <Button
+              variant="contained"
+              className="submit-button"
+              onClick={onLoginClicked}
+            >
+              Login
+            </Button>
           </div>
-
         </div>
       </div>
     </div>

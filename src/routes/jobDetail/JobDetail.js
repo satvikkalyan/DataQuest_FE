@@ -1,13 +1,13 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
-import { mockJobData } from "./mockJobData";
 import "./jobDetail.css";
 import { Button } from "@mui/material";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 
 function JobDetail() {
-  const navigate = useNavigate()
-  const jobDetails = mockJobData;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const jobDetails = location.state;
   return (
     <>
       <div className="jobdetails-title">
@@ -160,9 +160,11 @@ function JobDetail() {
               <Typography variant="h6">Company competitors</Typography>
             </div>
             <div className="job-det-details">
-              {jobDetails.company.competitors.map((item) => {
+              {jobDetails.company.competitors.map((item, index) => {
                 return (
-                  <Typography variant="h6">{item.competitorName}</Typography>
+                  <Typography variant="h6" key={index}>
+                    {item.competitorName}
+                  </Typography>
                 );
               })}
             </div>
@@ -172,8 +174,12 @@ function JobDetail() {
               <Typography variant="h6">Primary Skills Required</Typography>
             </div>
             <div className="job-det-details">
-              {jobDetails.skills.map((item) => {
-                return <Typography variant="h6">{item.skill}</Typography>;
+              {jobDetails.skills.map((item, index) => {
+                return (
+                  <Typography variant="h6" key={index}>
+                    {item.skill}
+                  </Typography>
+                );
               })}
             </div>
           </div>
@@ -181,7 +187,11 @@ function JobDetail() {
             <div className="job-det-label"></div>
             <div className="job-det-details">
               <div className="button-container">
-                <Button variant="contained" className="back-button" onClick={()=>navigate("/jobs")}>
+                <Button
+                  variant="contained"
+                  className="back-button"
+                  onClick={() => navigate("/jobs")}
+                >
                   back
                 </Button>
               </div>

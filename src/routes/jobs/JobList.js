@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./jobList.css";
 import BasicTable from "../../components/tables/TableComponent";
-import { mockData } from "../../utils/mockData";
+import { getDataFromAPI } from "../../APICalls";
+import { APIURL } from "../../constants";
 
 function JobList() {
-  console.log(mockData)
+  const [jobsData, setJobsData] = useState(undefined);
+  useEffect(() => {
+    getDataFromAPI(`${APIURL}/allJobs`).then((data) => {
+      setJobsData(data);
+    });
+  }, []);
   return (
     <>
       <div className="search-container">
@@ -14,7 +20,7 @@ function JobList() {
         </div>
         <div className="search-container-top">
           <div className="table-container">
-            <BasicTable rows={mockData} length={20}/>
+            {jobsData && <BasicTable rows={jobsData} length={25} />}
           </div>
         </div>
       </div>

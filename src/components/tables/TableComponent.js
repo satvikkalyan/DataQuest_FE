@@ -11,10 +11,10 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useNavigate } from "react-router-dom";
 import { columns } from "../../constants";
 
-export default function BasicTable({ rows,length }) {
+export default function BasicTable({ rows, length, searchFlag = false }) {
+  console.log(rows)
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(length ? length : 5);
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -38,7 +38,9 @@ export default function BasicTable({ rows,length }) {
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
-                  {column.label}
+                  {column.label==="Skills To Learn"?
+                  (searchFlag?column.label:"Required Skills"):column.label}
+
                 </TableCell>
               ))}
             </TableRow>
@@ -50,7 +52,21 @@ export default function BasicTable({ rows,length }) {
                 return (
                   <TableRow key={row.jobId} hover role="checkbox" tabIndex={-1}>
                     {columns.map((column) => {
-                      const value = row[column.id];
+                      var value = "";
+                      if (column.id === "company")
+                        value = row[column.id]["companyName"];
+                      else if (column.id === "skills") {
+                        const skillsArray = row[column.id];
+                        value = skillsArray
+                          .map((item) => item.skill)
+                          .join(", ");
+                      } else if (column.id === "avgSalary") {
+                        console.log();
+                        value =
+                          row[column.id] + (row["hourly"] ? " $ /hr" : " $/an");
+                      } else {
+                        value = row[column.id];
+                      }
                       return (
                         <TableCell key={column.id} align={column.align}>
                           {column.id === "navigate" ? (
@@ -59,6 +75,8 @@ export default function BasicTable({ rows,length }) {
                                 navigate(`/jobs/${row.jobId}`, { state: row })
                               }
                             />
+                          ) : typeof value === "object" ? (
+                            JSON.stringify(value)
                           ) : (
                             value
                           )}

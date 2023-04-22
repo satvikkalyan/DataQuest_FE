@@ -5,20 +5,21 @@ import Button from "@mui/material/Button";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import CancelIcon from "@mui/icons-material/Cancel";
 import BasicTable from "../../components/tables/TableComponent";
-import { mockData } from "../../utils/mockData";
-
+import { postDataToAPI } from "../../APICalls";
+import { APIURL } from "../../constants";
 function Search() {
-  const [skills, setSkills] = useState([{ value: "" }]);
+  const [skills, setSkills] = useState([""]);
+  const [jobsData, setJobsData] = useState(undefined);
 
   const handleChange = (index, event) => {
     const values = [...skills];
-    values[index].value = event.target.value;
+    values[index] = event.target.value;
     setSkills(values);
   };
 
   const handleAddFields = () => {
     const values = [...skills];
-    values.push({ value: "" });
+    values.push("");
     setSkills(values);
   };
 
@@ -30,7 +31,15 @@ function Search() {
 
   const handleSearch = () => {
     // logic for searching using the values in the `skills` state array
-    console.log(skills);
+    const skillsArray = { skills: skills };
+    postDataToAPI(`${APIURL}/jobs`, skillsArray)
+      .then((data) => {
+        console.log(data)
+        setJobsData(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
@@ -51,7 +60,7 @@ function Search() {
                   id={`skill-${index}`}
                   label="Enter your Skill Here"
                   variant="outlined"
-                  value={skill.value}
+                  value={skill}
                   onChange={(event) => handleChange(index, event)}
                 />
                 <div className="cancel-icon">
@@ -59,6 +68,7 @@ function Search() {
                 </div>
               </div>
             ))}
+
             <div className="boxer plus-icon">
               <ControlPointIcon onClick={handleAddFields} />
             </div>
@@ -76,7 +86,9 @@ function Search() {
         </div>
         <div className="search-container-bottom">
           <div className="table-container">
-            <BasicTable rows={mockData} length={5} />
+            {jobsData && (
+              <BasicTable rows={jobsData} length={5} searchFlag={true} />
+            )}
           </div>
         </div>
       </div>

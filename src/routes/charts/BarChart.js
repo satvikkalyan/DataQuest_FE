@@ -6,7 +6,7 @@ function BarChartComponent({data,x_axis,y_axis}) {
         <BarChart width={1400} height={400} data={data}>
           <XAxis dataKey={x_axis}   />
           <YAxis />
-          <Bar dataKey={y_axis} fill="#0F6392" />
+          <Bar dataKey={y_axis} fill="#0a3752" />
         </BarChart>
       );
 }
