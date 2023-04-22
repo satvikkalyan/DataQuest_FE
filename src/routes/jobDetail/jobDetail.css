@@ -9,7 +9,7 @@
     align-items: center;
     text-align: center;
     letter-spacing: 0.14em;
-    color: #0F6392;
+    color: #0a3752;
     padding-left: 20px;
 }
 
@@ -21,7 +21,7 @@
     width: 90%;
     height: 0px;
     border-radius: 25%;
-    background: #0F6392;
+    background: #0a3752;
     border: 5px solid rgba(15, 99, 146, 0.5);
     transform: rotate(-0.16deg);
 }

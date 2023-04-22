@@ -25,7 +25,7 @@ const AppLayout = () => (
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#0F6392", // Replace with your desired primary color
+      main: "#0a3752", // Replace with your desired primary color
     },
     secondary: {
       main: "#008000", // Replace with your desired secondary color
