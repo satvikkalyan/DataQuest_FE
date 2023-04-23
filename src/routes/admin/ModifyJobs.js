@@ -35,7 +35,12 @@ function ModifyJobs() {
     setModifyFlag(true);
   };
 
-  const handleModifyJob = () => {};
+  const handleModifyJob = () => {
+    if (selectedJob) {
+      const updatedJob = { ...selectedJob, ...formValues };
+      console.log(updatedJob);
+    } 
+  };
 
   const [formValues, setFormValues] = React.useState({
     jobTitle: "",
@@ -117,10 +122,6 @@ function ModifyJobs() {
   };
 
   const handleAddJob = () => {
-    if (selectedJob) {
-      const updatedJob = { ...selectedJob, ...formValues };
-      console.log(updatedJob);
-    } else {
       const newJob = { id: "23", ...formValues };
       const finalJobDet = {
         jobTitle: newJob.jobTitle,
@@ -188,7 +189,7 @@ function ModifyJobs() {
           });
         })
         .catch((err) => console.log(err));
-    }
+    
   };
 
   return (
