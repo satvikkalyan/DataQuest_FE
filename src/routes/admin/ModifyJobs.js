@@ -4,8 +4,26 @@ import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import AdminTable from "../../components/tables/AdminTable";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { getDataFromAPI } from "../../APICalls";
+import { deleteDataToAPI, getDataFromAPI, postDataToAPI } from "../../APICalls";
 import { APIURL } from "../../constants";
+
+function convertValueToJsonArray(value, key) {
+  const trimmedValue = value.trim();
+
+  const valuesArray = trimmedValue.split(",");
+
+  const jsonArray = valuesArray.map((val) => val.trim());
+  return jsonArray;
+}
+
+function convertValueToJsonArray2(value, key) {
+  const trimmedValue = value.trim();
+
+  const valuesArray = trimmedValue.split(",");
+
+  const jsonArray = valuesArray.map((val) => ({ key: val.trim() }));
+  return jsonArray;
+}
 
 function ModifyJobs() {
   const [rows, setRows] = useState([]);
@@ -13,7 +31,6 @@ function ModifyJobs() {
   const handleEdit = (job) => {
     updateFormValues(job);
   };
-
   const [formValues, setFormValues] = React.useState({
     jobTitle: "",
     jobDescription: "",
@@ -85,9 +102,11 @@ function ModifyJobs() {
 
   const handleDeleteRow = (id) => {
     const updatedRows = rows.filter((row) => row.jobId !== id);
-    getDataFromAPI(`${APIURL}/deleteJob/${id}}`).then((res) => {
+    console.log();
+    deleteDataToAPI(`${APIURL}/deleteJob/${id}`).then((res) => {
       console.log(res);
     });
+
     setRows(updatedRows);
   };
 
@@ -95,11 +114,74 @@ function ModifyJobs() {
     if (selectedJob) {
       const updatedJob = { ...selectedJob, ...formValues };
       console.log(updatedJob);
-      // update the selected job in the mockData array
     } else {
       const newJob = { id: "23", ...formValues };
-      // add the new job to the mockData array
-      console.log(newJob);
+      const finalJobDet = {
+        jobTitle: newJob.jobTitle,
+        jobDescription: newJob.jobDescription,
+        hourly: newJob.payType === 1 ? true : false,
+        employerProvided: newJob.employeeProvidedData === 1 ? true : false,
+        lowerSalary: parseInt(newJob.lowerSalary),
+        upperSalary: parseInt(newJob.upperSalary),
+        avgSalary: parseInt(newJob.avgSalary),
+        company: {
+          companyName: newJob.companyName,
+          rating: parseInt(newJob.rating),
+          location: newJob.location,
+          headquarters: newJob.headquarters,
+          size: newJob.size,
+          founded: newJob.founded,
+          typeOfOwnership: newJob.ownership,
+          industry: newJob.industry,
+          sector: newJob.sector,
+          revenue: newJob.revenue,
+          competitors: convertValueToJsonArray(
+            newJob.competitors,
+            "competitorName"
+          ),
+        },
+        skills: convertValueToJsonArray(newJob.skills, "skill"),
+      };
+      postDataToAPI(`${APIURL}/createJob`, finalJobDet)
+        .then((data) => {
+          const updatedRowForTable = {
+            ...finalJobDet,
+            id: data,
+            company: {
+              ...finalJobDet.company,
+              competitors: convertValueToJsonArray2(
+                newJob.competitors,
+                "competitorName"
+              ),
+            },
+            skills: convertValueToJsonArray2(newJob.skills, "skill"),
+          };
+          const updatedRows = rows;
+          updatedRows.push(updatedRowForTable);
+          setRows(updatedRows);
+          setFormValues({
+            jobTitle: "",
+            jobDescription: "",
+            payType: "",
+            companyName: "",
+            rating: "",
+            employeeProvidedData: "",
+            lowerSalary: "",
+            upperSalary: "",
+            avgSalary: "",
+            location: "",
+            headquarters: "",
+            size: "",
+            founded: "",
+            ownership: "",
+            industry: "",
+            sector: "",
+            revenue: "",
+            competitors: "",
+            skills: "",
+          });
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -119,9 +201,9 @@ function ModifyJobs() {
               <div className="Boxer">
                 <TextField
                   id="outlined-basic-1"
-                  label="Job Name"
+                  label="Job Title"
                   variant="outlined"
-                  name="jobName"
+                  name="jobTitle"
                   value={formValues.jobTitle}
                   onChange={handleChange}
                 />

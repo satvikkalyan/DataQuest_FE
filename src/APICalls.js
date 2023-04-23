@@ -11,7 +11,22 @@ export const getDataFromAPI = (URL) => {
     });
 };
 
+export const deleteDataToAPI = (URL) => {
+  return fetch(URL, {
+    method: "DELETE",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    return res.json();
+  });
+};
+
+
+
 export const postDataToAPI = (URL, jsonData) => {
+  console.log(URL,jsonData)
   return fetch(URL, {
     method: "POST",
     mode: "cors",
