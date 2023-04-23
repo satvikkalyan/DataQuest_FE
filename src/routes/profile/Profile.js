@@ -8,7 +8,7 @@ import { APIURL } from "../../constants";
 import { putDataToAPI } from "../../APICalls";
 
 import Rating from "@mui/material/Rating";
-
+import CircularLoading from "../../utils/CircularLoading";
 function Profile() {
   const updateUserDetails = useUpdateLoginDet();
   const userDetails = useLoginDet();
@@ -16,7 +16,9 @@ function Profile() {
   const handleChange = (event) => {
     setSkills(event.target.value);
   };
+  const [isLoading, setLoadingFlag] = useState(false);
   const onSaveClicked = () => {
+    setLoadingFlag(true);
     const updatedUserData = {
       firstName: formValues.firstName,
       lastName: formValues.lastName,
@@ -38,9 +40,11 @@ function Profile() {
           userDetails.lastName = formValues.lastName;
           updateUserDetails(userDetails);
           setDisabled(true);
+          setLoadingFlag(false);
         })
         .catch((err) => console.error(err));
     }
+    setLoadingFlag(true);
     if (
       userDetails.company !== formValues.company ||
       userDetails.title !== formValues.title ||
@@ -56,8 +60,11 @@ function Profile() {
           userDetails.salary = formValues.salary;
           updateUserDetails(userDetails);
           setDisabled(true);
+          setLoadingFlag(false);
         })
         .catch((err) => console.error(err));
+    } else {
+      setLoadingFlag(false);
     }
   };
   const checkIfSame = (object, formValues) => {
@@ -109,6 +116,7 @@ function Profile() {
         <p className="under-line"></p>
       </div>
       <div className="profile-content">
+      {<CircularLoading isLoading={isLoading} />}
         <div className="profile-container-left">
           <div className="user-profile-picture">
             <img

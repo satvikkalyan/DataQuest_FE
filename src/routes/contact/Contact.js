@@ -4,21 +4,28 @@ import "./contact.css";
 import Button from "@mui/material/Button";
 import { postDataToAPI } from "../../APICalls";
 import { APIURL } from "../../constants";
+import CircularLoading from "../../utils/CircularLoading";
 function Contact() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [emailSentFlag, setEmailSetFlag] = useState(false);
-
+  const [isLoading, setLoadingFlag] = useState(false);
   const handleOnSubmitEmail = () => {
+    setLoadingFlag(true);
     const data = { name: name, email: email, description: desc };
-    postDataToAPI(`${APIURL}/send-email`, data).then((data) => {
-      console.log(data);
-      setEmailSetFlag(true);
-      setEmail("");
-      setName("");
-      setDesc("");
-    });
+    postDataToAPI(`${APIURL}/send-email`, data)
+      .then((data) => {
+        setEmailSetFlag(true);
+        setLoadingFlag(false);
+        setEmail("");
+        setName("");
+        setDesc("");
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoadingFlag(false);
+      });
   };
   const handleEmailChange = (event) => {
     const { name, value } = event.target;
@@ -47,6 +54,7 @@ function Contact() {
       <div className="contact-content">
         <div className="contact-container-left">
           <div className="input-components">
+            {<CircularLoading isLoading={isLoading} />}
             <div className="boxer">
               <TextField
                 id="outlined-basic-1"

@@ -9,6 +9,7 @@ import { APIURL, userObjTemplate } from "../../constants";
 import { getDataFromAPI } from "../../APICalls";
 import { useNavigate } from "react-router-dom";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import CircularLoading from "../../utils/CircularLoading";
 
 function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -16,6 +17,7 @@ function LoginScreen() {
   const [password, setPassword] = useState("");
   const [admin, setAdmin] = useState("");
   const updateUserDetails = useUpdateLoginDet();
+  const [isLoading, setLoadingFlag] = useState(false);
   const checkIfCorrectCred = (userDataObject) => {
     return (
       userDataObject?.passphrase === password &&
@@ -25,31 +27,39 @@ function LoginScreen() {
   };
 
   const onLoginClicked = () => {
-    getDataFromAPI(`${APIURL}/users/verify/${email}`).then(function (userData) {
-      userData = userData[0];
-      const userDataObject = {
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        email: userData.email,
-        gender: userData.gender,
-        title: userData.title,
-        company: userData.company,
-        job_rating: userData.job_rating,
-        passphrase: userData.passphrase,
-        salary: userData.salary,
-        salary_type: userData.salary_type,
-        user_id: userData.user_id,
-        isAdmin: userData.isAdmin,
-      };
+    setLoadingFlag(true);
+    getDataFromAPI(`${APIURL}/users/verify/${email}`)
+      .then(function (userData) {
+        userData = userData[0];
+        const userDataObject = {
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          email: userData.email,
+          gender: userData.gender,
+          title: userData.title,
+          company: userData.company,
+          job_rating: userData.job_rating,
+          passphrase: userData.passphrase,
+          salary: userData.salary,
+          salary_type: userData.salary_type,
+          user_id: userData.user_id,
+          isAdmin: userData.isAdmin,
+        };
 
-      if (checkIfCorrectCred(userDataObject)) {
-        updateUserDetails(userDataObject);
-        navigate("/home");
-      } else {
-        window.alert("Incorrect Credentials");
-        updateUserDetails(userObjTemplate);
-      }
-    });
+        if (checkIfCorrectCred(userDataObject)) {
+          setLoadingFlag(false);
+          updateUserDetails(userDataObject);
+          navigate("/home");
+        } else {
+          setLoadingFlag(false);
+          window.alert("Incorrect Credentials");
+          updateUserDetails(userObjTemplate);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoadingFlag(false);
+      });
   };
 
   const handleEmailChange = (e) => {
@@ -75,6 +85,7 @@ function LoginScreen() {
             style={{ width: "190px", height: "100px" }}
           />
         </div>
+        {<CircularLoading isLoading={isLoading} />}
         <div className="boxer">
           <TextField
             id="outlined-basic-1"

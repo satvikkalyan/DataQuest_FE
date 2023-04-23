@@ -6,6 +6,7 @@ import AdminTable from "../../components/tables/AdminTable";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { deleteDataToAPI, getDataFromAPI, postDataToAPI } from "../../APICalls";
 import { APIURL } from "../../constants";
+import CircularLoading from "../../utils/CircularLoading";
 
 function convertValueToJsonArray(value, key) {
   const trimmedValue = value.trim();
@@ -26,6 +27,8 @@ function convertValueToJsonArray2(value, key) {
 }
 
 function ModifyJobs() {
+  const [isLoading, setLoadingFlag] = useState(true);
+
   const [rows, setRows] = useState([]);
   const [modifyFlag, setModifyFlag] = useState(false);
   const [actualData, setActualData] = useState(undefined);
@@ -59,6 +62,7 @@ function ModifyJobs() {
   };
 
   const handleModifyJob = () => {
+    setLoadingFlag(true);
     const job = {
       jobId: actualData.jobId,
       jobTitle: formValues.jobTitle,
@@ -113,9 +117,15 @@ function ModifyJobs() {
       },
       skills: convertValueToJsonArray2(formValues.skills, "skill"),
     };
-    postDataToAPI(`${APIURL}/updateJob`, job).then((res) => {
-      console.log("Updated", res);
-    });
+    postDataToAPI(`${APIURL}/updateJob`, job)
+      .then((res) => {
+        console.log("Updated", res);
+        setLoadingFlag(false);
+      })
+      .catch((err) => {
+        setLoadingFlag(false);
+        console.error(err);
+      });
 
     const updatedRows = rows.map((row) => {
       if (row.jobId === actualData.jobId) {
@@ -181,6 +191,7 @@ function ModifyJobs() {
     if (rows.length === 0) {
       getDataFromAPI(`${APIURL}/allJobs`).then((data) => {
         setRows(data);
+        setLoadingFlag(false);
       });
     }
   }, [rows.length]);
@@ -195,15 +206,22 @@ function ModifyJobs() {
 
   const handleDeleteRow = (id) => {
     const updatedRows = rows.filter((row) => row.jobId !== id);
-    console.log();
-    deleteDataToAPI(`${APIURL}/deleteJob/${id}`).then((res) => {
-      console.log(res);
-    });
+    setLoadingFlag(true);
+    deleteDataToAPI(`${APIURL}/deleteJob/${id}`)
+      .then((res) => {
+        console.log(res);
+        setLoadingFlag(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoadingFlag(false);
+      });
 
     setRows(updatedRows);
   };
 
   const handleAddJob = () => {
+    setLoadingFlag(true);
     const newJob = { id: "23", ...formValues };
     const finalJobDet = {
       jobTitle: newJob.jobTitle,
@@ -269,8 +287,12 @@ function ModifyJobs() {
           competitors: "",
           skills: "",
         });
+        setLoadingFlag(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setLoadingFlag(false);
+        console.log(err);
+      });
   };
 
   return (
@@ -376,6 +398,7 @@ function ModifyJobs() {
             </div>
             <div className="modify-container-top-left-1">
               <div className="Boxer">
+                {<CircularLoading isLoading={isLoading} />}
                 <FormControl variant="outlined" className="inputform">
                   <InputLabel id="e-p-d">Employee Provided Data</InputLabel>
                   <Select

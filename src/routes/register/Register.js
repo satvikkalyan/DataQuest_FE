@@ -8,9 +8,12 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useUpdateLoginDet } from "./../../UserContext";
 import { APIURL, userObjTemplate } from "../../constants";
 import { postDataToAPI } from "../../APICalls";
+import CircularLoading from "../../utils/CircularLoading";
 function Register() {
   const navigate = useNavigate();
   const updateUserDetails = useUpdateLoginDet();
+  const [isLoading, setLoadingFlag] = useState(false);
+
   const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",
@@ -29,6 +32,7 @@ function Register() {
   };
 
   const onSubmitClicked = () => {
+    setLoadingFlag(true);
     if (formValues.password === formValues.confirmPassword) {
       const newUserDetails = {
         firstName: formValues.firstName,
@@ -37,17 +41,28 @@ function Register() {
         passphrase: formValues.password,
         gender: formValues.gender,
       };
-      postDataToAPI(`${APIURL}/users`, newUserDetails).then((res) => {
-        if (res > 0) {
-          const updatedUserDetails = { ...userObjTemplate, ...newUserDetails };
-          updatedUserDetails.user_id = res;
-          updateUserDetails(updatedUserDetails);
-          navigate("/home");
-        } else {
-          window.alert("Error Creating user");
-        }
-      });
+      postDataToAPI(`${APIURL}/users`, newUserDetails)
+        .then((res) => {
+          if (res > 0) {
+            const updatedUserDetails = {
+              ...userObjTemplate,
+              ...newUserDetails,
+            };
+            updatedUserDetails.user_id = res;
+            updateUserDetails(updatedUserDetails);
+            navigate("/home");
+            setLoadingFlag(false);
+          } else {
+            window.alert("Error Creating user");
+            setLoadingFlag(false);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          setLoadingFlag(false);
+        });
     } else {
+      setLoadingFlag(false);
       window.alert("Passwords doesnt match");
     }
   };
@@ -65,6 +80,7 @@ function Register() {
         />
       </div>
       <div className="login-content">
+        {<CircularLoading isLoading={isLoading} />}
         <div className="boxer">
           <TextField
             id="firstName-field"

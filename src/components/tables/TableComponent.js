@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import { columns } from "../../constants";
 
 export default function BasicTable({ rows, length, searchFlag = false }) {
-  console.log(rows)
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(length ? length : 5);
   const handleChangePage = (event, newPage) => {

@@ -7,9 +7,11 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import BasicTable from "../../components/tables/TableComponent";
 import { postDataToAPI } from "../../APICalls";
 import { APIURL } from "../../constants";
+import CircularLoading from "../../utils/CircularLoading";
 function Search() {
   const [skills, setSkills] = useState([""]);
   const [jobsData, setJobsData] = useState(undefined);
+  const [isLoading, setLoadingFlag] = useState(false);
 
   const handleChange = (index, event) => {
     const values = [...skills];
@@ -30,15 +32,16 @@ function Search() {
   };
 
   const handleSearch = () => {
-    // logic for searching using the values in the `skills` state array
     const skillsArray = { skills: skills };
+    setLoadingFlag(true);
     postDataToAPI(`${APIURL}/jobs`, skillsArray)
       .then((data) => {
-        console.log(data)
         setJobsData(data);
+        setLoadingFlag(false);
       })
       .catch((err) => {
         console.error(err);
+        setLoadingFlag(false);
       });
   };
 
@@ -53,6 +56,7 @@ function Search() {
           <div className="search-container-top-left">
             <p className="skills-title">Skills:</p>
           </div>
+          {<CircularLoading isLoading={isLoading} />}
           <div className="search-container-top-right">
             {skills.map((skill, index) => (
               <div key={index} className="boxer">

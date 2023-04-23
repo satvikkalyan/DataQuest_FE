@@ -4,10 +4,13 @@ import BarChartComponent from "./BarChart";
 import { Button } from "@mui/material";
 import { getDataFromAPI } from "../../APICalls";
 import { APIURL } from "../../constants";
+import CircularLoading from "../../utils/CircularLoading";
+
 function Charts() {
   const [annualData,setAnnualData] = useState([])
   const [hourlyData,setHourlyData] = useState([])
   const [Openings,setOpenings] = useState([])
+  const [isLoading, setLoadingFlag] = useState(true);
 
   const [chartType, setChartType] = useState("Annual");
   useEffect(()=>{
@@ -15,7 +18,11 @@ function Charts() {
       setAnnualData(data?.avgAnnuallyPayByIndustry)
       setHourlyData(data?.avgHourlyPayByIndustry)
       setOpenings(data?.numOfJobOpeningsByIndustry)
-    })
+      setLoadingFlag(false)
+    }).catch((err) => {
+      console.error(err);
+      setLoadingFlag(false);
+    });
   },[])
 
 
@@ -33,6 +40,8 @@ function Charts() {
         <h4>Job Market Insights</h4>
         <p className="under-line"></p>
       </div>
+      {<CircularLoading isLoading={isLoading} />}
+
       <div className="charts-sub-title">
         <h4>Average Annual or Hourly Pay by Industry</h4>
       </div>
