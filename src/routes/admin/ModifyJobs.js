@@ -28,9 +28,15 @@ function convertValueToJsonArray2(value, key) {
 function ModifyJobs() {
   const [rows, setRows] = useState([]);
   const [selectedJob, setSelectedJob] = useState(undefined);
+  const [modifyFlag, setModifyFlag] = useState(false);
+
   const handleEdit = (job) => {
     updateFormValues(job);
+    setModifyFlag(true);
   };
+
+  const handleModifyJob = () => {};
+
   const [formValues, setFormValues] = React.useState({
     jobTitle: "",
     jobDescription: "",
@@ -267,13 +273,23 @@ function ModifyJobs() {
                 />
               </div>
               <div className="Boxer plus-icon">
-                <Button
-                  variant="contained"
-                  className="add-button"
-                  onClick={handleAddJob}
-                >
-                  Add Job
-                </Button>
+                {!modifyFlag ? (
+                  <Button
+                    variant="contained"
+                    className="add-button"
+                    onClick={handleAddJob}
+                  >
+                    Add Job
+                  </Button>
+                ) : (
+                  <Button
+                    variant="contained"
+                    className="add-button"
+                    onClick={handleModifyJob}
+                  >
+                    Modify Job
+                  </Button>
+                )}
               </div>
             </div>
             <div className="modify-container-top-left-1">
