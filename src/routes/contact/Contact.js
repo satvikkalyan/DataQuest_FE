@@ -1,8 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField } from "@mui/material";
 import "./contact.css";
 import Button from "@mui/material/Button";
+import { postDataToAPI } from "../../APICalls";
+import { APIURL } from "../../constants";
 function Contact() {
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
+
+  const handleOnSubmitEmail = () => {
+    const data = { name: name, email: email, description: desc };
+    postDataToAPI(`${APIURL}/send-email`, data).then((data) =>
+      console.log(data)
+    );
+  };
+  const handleEmailChange = (event) => {
+    const { name, value } = event.target;
+    console.log(name);
+    setEmail(value);
+  };
+  const handleNameChange = (event) => {
+    const { name, value } = event.target;
+    console.log(name);
+
+    setName(value);
+  };
+  const handleDescChange = (event) => {
+    const { name, value } = event.target;
+    console.log(name);
+
+    setDesc(value);
+  };
+
   return (
     <div className="contact-container">
       <div className="contact-title">
@@ -17,6 +47,8 @@ function Contact() {
                 id="outlined-basic-1"
                 label="Name"
                 variant="outlined"
+                value={name}
+                onChange={handleNameChange}
               />
             </div>
             <div className="boxer">
@@ -24,20 +56,27 @@ function Contact() {
                 id="outlined-basic-1"
                 label="Email"
                 variant="outlined"
+                value={email}
+                onChange={handleEmailChange}
               />
             </div>
             <div className="boxer">
               <TextField
                 id="outlined-multiline-static"
+                onChange={handleDescChange}
                 label="Description"
                 multiline
                 rows={4}
-                defaultValue=""
+                value={desc}
               />
             </div>
             <div className="boxer">
               <div className="boxer-button">
-                <Button variant="contained" className="submit-button">
+                <Button
+                  variant="contained"
+                  className="submit-button"
+                  onClick={handleOnSubmitEmail}
+                >
                   Submit
                 </Button>
               </div>
