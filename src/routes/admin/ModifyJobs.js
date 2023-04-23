@@ -21,27 +21,14 @@ function convertValueToJsonArray2(value, key) {
 
   const valuesArray = trimmedValue.split(",");
 
-  const jsonArray = valuesArray.map((val) => ({ key: val.trim() }));
+  const jsonArray = valuesArray.map((val) => ({ [key]: val.trim() }));
   return jsonArray;
 }
 
 function ModifyJobs() {
   const [rows, setRows] = useState([]);
-  const [selectedJob, setSelectedJob] = useState(undefined);
   const [modifyFlag, setModifyFlag] = useState(false);
-
-  const handleEdit = (job) => {
-    updateFormValues(job);
-    setModifyFlag(true);
-  };
-
-  const handleModifyJob = () => {
-    if (selectedJob) {
-      const updatedJob = { ...selectedJob, ...formValues };
-      console.log(updatedJob);
-    } 
-  };
-
+  const [actualData, setActualData] = useState(undefined);
   const [formValues, setFormValues] = React.useState({
     jobTitle: "",
     jobDescription: "",
@@ -63,6 +50,105 @@ function ModifyJobs() {
     competitors: "",
     skills: "",
   });
+
+  const handleEdit = (job) => {
+    updateFormValues(job);
+    const { companyId, ...jobWithoutCompanyId } = job;
+    setActualData(jobWithoutCompanyId);
+    setModifyFlag(true);
+  };
+
+  const handleModifyJob = () => {
+    const job = {
+      jobId: actualData.jobId,
+      jobTitle: formValues.jobTitle,
+      jobDescription: formValues.jobDescription,
+      hourly: formValues.payType === 1 ? true : false,
+      employerProvided: formValues.employeeProvidedData === 1 ? true : false,
+      lowerSalary: parseInt(formValues.lowerSalary),
+      upperSalary: parseInt(formValues.upperSalary),
+      avgSalary: parseInt(formValues.avgSalary),
+      company: {
+        companyName: formValues.companyName,
+        rating: parseInt(formValues.rating),
+        location: formValues.location,
+        headquarters: formValues.headquarters,
+        size: formValues.size,
+        founded: formValues.founded,
+        typeOfOwnership: formValues.ownership,
+        industry: formValues.industry,
+        sector: formValues.sector,
+        revenue: formValues.revenue,
+        competitors: convertValueToJsonArray(
+          formValues.competitors,
+          "competitorName"
+        ),
+      },
+      skills: convertValueToJsonArray(formValues.skills, "skill"),
+    };
+    const job2 = {
+      jobId: actualData.jobId,
+      jobTitle: formValues.jobTitle,
+      jobDescription: formValues.jobDescription,
+      hourly: formValues.payType === 1 ? true : false,
+      employerProvided: formValues.employeeProvidedData === 1 ? true : false,
+      lowerSalary: parseInt(formValues.lowerSalary),
+      upperSalary: parseInt(formValues.upperSalary),
+      avgSalary: parseInt(formValues.avgSalary),
+      company: {
+        companyName: formValues.companyName,
+        rating: parseInt(formValues.rating),
+        location: formValues.location,
+        headquarters: formValues.headquarters,
+        size: formValues.size,
+        founded: formValues.founded,
+        typeOfOwnership: formValues.ownership,
+        industry: formValues.industry,
+        sector: formValues.sector,
+        revenue: formValues.revenue,
+        competitors: convertValueToJsonArray2(
+          formValues.competitors,
+          "competitorName"
+        ),
+      },
+      skills: convertValueToJsonArray2(formValues.skills, "skill"),
+    };
+    postDataToAPI(`${APIURL}/updateJob`, job).then((res) => {
+      console.log("Updated", res);
+    });
+
+    const updatedRows = rows.map((row) => {
+      if (row.jobId === actualData.jobId) {
+        return job2;
+      } else {
+        return row;
+      }
+    });
+
+    setRows(updatedRows);
+
+    setFormValues({
+      jobTitle: "",
+      jobDescription: "",
+      payType: "",
+      companyName: "",
+      rating: "",
+      employeeProvidedData: "",
+      lowerSalary: "",
+      upperSalary: "",
+      avgSalary: "",
+      location: "",
+      headquarters: "",
+      size: "",
+      founded: "",
+      ownership: "",
+      industry: "",
+      sector: "",
+      revenue: "",
+      competitors: "",
+      skills: "",
+    });
+  };
 
   const updateFormValues = (data) => {
     const formValues = {
@@ -97,11 +183,7 @@ function ModifyJobs() {
         setRows(data);
       });
     }
-    if (selectedJob) {
-      setFormValues(selectedJob);
-      setSelectedJob(selectedJob);
-    }
-  }, [selectedJob, rows.length]);
+  }, [rows.length]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -122,74 +204,73 @@ function ModifyJobs() {
   };
 
   const handleAddJob = () => {
-      const newJob = { id: "23", ...formValues };
-      const finalJobDet = {
-        jobTitle: newJob.jobTitle,
-        jobDescription: newJob.jobDescription,
-        hourly: newJob.payType === 1 ? true : false,
-        employerProvided: newJob.employeeProvidedData === 1 ? true : false,
-        lowerSalary: parseInt(newJob.lowerSalary),
-        upperSalary: parseInt(newJob.upperSalary),
-        avgSalary: parseInt(newJob.avgSalary),
-        company: {
-          companyName: newJob.companyName,
-          rating: parseInt(newJob.rating),
-          location: newJob.location,
-          headquarters: newJob.headquarters,
-          size: newJob.size,
-          founded: newJob.founded,
-          typeOfOwnership: newJob.ownership,
-          industry: newJob.industry,
-          sector: newJob.sector,
-          revenue: newJob.revenue,
-          competitors: convertValueToJsonArray(
-            newJob.competitors,
-            "competitorName"
-          ),
-        },
-        skills: convertValueToJsonArray(newJob.skills, "skill"),
-      };
-      postDataToAPI(`${APIURL}/createJob`, finalJobDet)
-        .then((data) => {
-          const updatedRowForTable = {
-            ...finalJobDet,
-            id: data,
-            company: {
-              ...finalJobDet.company,
-              competitors: convertValueToJsonArray2(
-                newJob.competitors,
-                "competitorName"
-              ),
-            },
-            skills: convertValueToJsonArray2(newJob.skills, "skill"),
-          };
-          const updatedRows = rows;
-          updatedRows.push(updatedRowForTable);
-          setRows(updatedRows);
-          setFormValues({
-            jobTitle: "",
-            jobDescription: "",
-            payType: "",
-            companyName: "",
-            rating: "",
-            employeeProvidedData: "",
-            lowerSalary: "",
-            upperSalary: "",
-            avgSalary: "",
-            location: "",
-            headquarters: "",
-            size: "",
-            founded: "",
-            ownership: "",
-            industry: "",
-            sector: "",
-            revenue: "",
-            competitors: "",
-            skills: "",
-          });
-        })
-        .catch((err) => console.log(err));
-    
+    const newJob = { id: "23", ...formValues };
+    const finalJobDet = {
+      jobTitle: newJob.jobTitle,
+      jobDescription: newJob.jobDescription,
+      hourly: newJob.payType === 1 ? true : false,
+      employerProvided: newJob.employeeProvidedData === 1 ? true : false,
+      lowerSalary: parseInt(newJob.lowerSalary),
+      upperSalary: parseInt(newJob.upperSalary),
+      avgSalary: parseInt(newJob.avgSalary),
+      company: {
+        companyName: newJob.companyName,
+        rating: parseInt(newJob.rating),
+        location: newJob.location,
+        headquarters: newJob.headquarters,
+        size: newJob.size,
+        founded: newJob.founded,
+        typeOfOwnership: newJob.ownership,
+        industry: newJob.industry,
+        sector: newJob.sector,
+        revenue: newJob.revenue,
+        competitors: convertValueToJsonArray(
+          newJob.competitors,
+          "competitorName"
+        ),
+      },
+      skills: convertValueToJsonArray(newJob.skills, "skill"),
+    };
+    postDataToAPI(`${APIURL}/createJob`, finalJobDet)
+      .then((data) => {
+        const updatedRowForTable = {
+          ...finalJobDet,
+          id: data,
+          company: {
+            ...finalJobDet.company,
+            competitors: convertValueToJsonArray2(
+              newJob.competitors,
+              "competitorName"
+            ),
+          },
+          skills: convertValueToJsonArray2(newJob.skills, "skill"),
+        };
+        const updatedRows = rows;
+        updatedRows.push(updatedRowForTable);
+        setRows(updatedRows);
+        setFormValues({
+          jobTitle: "",
+          jobDescription: "",
+          payType: "",
+          companyName: "",
+          rating: "",
+          employeeProvidedData: "",
+          lowerSalary: "",
+          upperSalary: "",
+          avgSalary: "",
+          location: "",
+          headquarters: "",
+          size: "",
+          founded: "",
+          ownership: "",
+          industry: "",
+          sector: "",
+          revenue: "",
+          competitors: "",
+          skills: "",
+        });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
