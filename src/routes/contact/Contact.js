@@ -8,12 +8,17 @@ function Contact() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
+  const [emailSentFlag, setEmailSetFlag] = useState(false);
 
   const handleOnSubmitEmail = () => {
     const data = { name: name, email: email, description: desc };
-    postDataToAPI(`${APIURL}/send-email`, data).then((data) =>
-      console.log(data)
-    );
+    postDataToAPI(`${APIURL}/send-email`, data).then((data) => {
+      console.log(data);
+      setEmailSetFlag(true);
+      setEmail("");
+      setName("");
+      setDesc("");
+    });
   };
   const handleEmailChange = (event) => {
     const { name, value } = event.target;
@@ -70,6 +75,11 @@ function Contact() {
                 value={desc}
               />
             </div>
+            {emailSentFlag && (
+              <div className="boxer">
+                <p>Email Send Successfully!</p>
+              </div>
+            )}
             <div className="boxer">
               <div className="boxer-button">
                 <Button
