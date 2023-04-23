@@ -21,12 +21,21 @@ function Navbar() {
           <Link to="#" className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
-          <div>
-            <Link to="/about-us" className="menu-bar-link company-title">
-              Data Quest
-            </Link>
-          </div>
+          <Link to="/about-us" className="menu-bar-link company-title">
+            Data Quest
+          </Link>
           <div className="menu-bar-right">
+            {userDetails.isAdmin ? (
+              <div>
+                <span className="admin-span menu-bar-link">ADMIN</span>
+              </div>
+            ) : userDetails.user_id !== "" ? (
+              <div>
+                <span className="admin-span menu-bar-link">USER</span>
+              </div>
+            ) : (
+              <div></div>
+            )}
             <Link to="/home" className="menu-bar-link">
               Home
             </Link>
@@ -70,7 +79,7 @@ function Navbar() {
               } else {
                 return item;
               }
-              return undefined
+              return undefined;
             }).map((item, index) => {
               switch (true) {
                 case !(

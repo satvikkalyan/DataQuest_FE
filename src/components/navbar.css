@@ -95,3 +95,10 @@
   .company-title{
     font-size: xx-large
   }
+
+  .admin-span{
+    padding-left: 20px;
+    background-color: rgb(3, 3, 3);
+    color: #f8a300;
+    border-radius: 15px;
+  }
