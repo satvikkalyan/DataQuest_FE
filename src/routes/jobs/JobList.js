@@ -28,7 +28,7 @@ function JobList() {
         <div className="search-container-top">
           <div className="table-container">
           {<CircularLoading isLoading={isLoading} />}
-            {jobsData && <BasicTable rows={jobsData} length={25} />}
+            {jobsData?.length>0 && <BasicTable rows={jobsData} length={25} />}
           </div>
         </div>
       </div>

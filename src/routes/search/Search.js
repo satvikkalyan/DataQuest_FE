@@ -90,7 +90,7 @@ function Search() {
         </div>
         <div className="search-container-bottom">
           <div className="table-container">
-            {jobsData && (
+            {jobsData?.length>0 && (
               <BasicTable rows={jobsData} length={5} searchFlag={true} />
             )}
           </div>
